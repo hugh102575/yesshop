@@ -66,12 +66,12 @@
 
 
 
-<div class="container py-4 ">
+<div class="container-fluid py-4 px-5">
     <div class="row">
-        <div class="col-sm-2 text-center ">
+        <div class="col-sm-2  text-center ">
 
             <div class="card">
-                <div class="card-body">
+                <div class="card-body ">
                     <div class="form-group">
                         <label class="font-weight-bold">類別</label>
                     </div>
@@ -91,7 +91,7 @@
 
 
         </div>
-        <div class="col-sm-10 text-center">
+        <div class="col-sm-10 text-center ">
 
             @yield('stage')
         </div>

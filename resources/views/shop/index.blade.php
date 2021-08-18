@@ -11,7 +11,7 @@
 
 .serv ul li {
   list-style: none;
-  flex: 0 0 33.333333%;
+  flex: 0 0 25%;
 }
 .center {
 text-align: center;
