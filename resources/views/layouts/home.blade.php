@@ -1,5 +1,8 @@
 @extends('layouts.app')
 <title>{{ Auth::user()->shop->Shop_Name }}</title>
+<!--
+後台的主要模板
+-->
 @section('app_css')
 <link href="{{asset('vendor/collapsible-sticky-sidebar-nav-next/css/perfect-scrollbar.css')}}" rel="stylesheet">
 <link href="{{asset('vendor/collapsible-sticky-sidebar-nav-next/css/next-sidebar.css')}}" rel="stylesheet">

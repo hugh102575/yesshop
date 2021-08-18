@@ -13,16 +13,18 @@ class GuestShoppingController extends Controller
         $this->userRepo=$userRepo;
     }
     public function init_session($request,$token){
-        $user=$this->userRepo->token_index($token);
-        $request->session()->put('user', $user);
+            $user=$this->userRepo->token_index($token);
+            $request->session()->put('user', $user);
     }
     public function index(Request $request,$token){
-        $this->init_session($request,$token);
-        return view('shop.home');
+      // $this->init_session($request,$token);
+       $user=$this->userRepo->token_index($token);
+       return view('shop.index',['user'=>$user]);
     }
     public function example(Request $request,$token){
-        $this->init_session($request,$token);
-        return view('shop.example');
+       // $this->init_session($request,$token);
+       $user=$this->userRepo->token_index($token);
+        return view('shop.example',['user'=>$user]);
     }
 
 

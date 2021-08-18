@@ -1,5 +1,9 @@
 @extends('layouts.home')
+@section('css')
+<style>
 
+</style>
+@endsection
 @section('stage')
 
 
@@ -26,11 +30,19 @@
                         <label for="bg_img" class="col-sm-4 col-form-label">商店背景圖片</label>
                         <div class="col-sm-8">
                         <input type="file" name="bg_img">
+
                         <input class="hidden_object" name="bg_old_img" value="{{$shop_config->bg_img}}">
+                        @if($shop_config->bg_img!=null)
+                            <button name="del_bg_btn" type="submit"class="btn btn-link text-danger">刪除背景</button>
+                        @endif
                         <img src="{{$shop_config->bg_img}}"  style="max-height: 20rem; max-width: 20rem;">
+
+
+
                         <small>{{$shop_config->bg_img}}</small>
+
                         </div>
-                    </div>
+            </div>
         </div>
         </div>
 
@@ -52,5 +64,6 @@
 window.addEventListener('load', function () {
     document.getElementById('nav_title').innerHTML="布景設定";
 });
+
 </script>
 @endsection

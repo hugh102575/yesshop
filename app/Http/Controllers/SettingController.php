@@ -18,7 +18,7 @@ class SettingController extends Controller
         return view('setting.page',['shop_config'=>$shop_config]);
     }
     public function update(Request $request){
-        $result=$this->shopRepo->update($request->all());
+        $result=$this->shopRepo->update($request,$request->all());
         if($result){
             return redirect()->route('setting.page')->with('success_msg', '布景已設定！');
         }else{
