@@ -8,6 +8,11 @@
 用來放商店每一頁都會出現的東西，例如nav,sidebar等等
 -->
 @section('app_css')
+<style>
+    .enlarge_text{
+    font-size: x-large !important;
+}
+</style>
     @yield('css')
 @endsection
 
@@ -24,8 +29,8 @@
 
 
 @section('content')
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand ml-3" href="#">{{$user->shop->Shop_Name}}</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand ml-3 text-light" href="#">{{$user->shop->Shop_Name}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -55,12 +60,12 @@
       <li class="nav-item ">
         <form class="form-inline ml-5 my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="尋找商品" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜尋</button>
+            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜尋</button>
         </form>
       </li>
 
     </ul>
-    <button class="btn btn-link text-primary"><i class="fas fa-shopping-cart nav-item"> 購物車</i></button>
+    <button class="btn btn-link text-success"><i class="fas fa-shopping-cart"> 購物車</i></button>
   </div>
 </nav>
 
@@ -79,9 +84,13 @@
                     @if(count($user->shop->category)==0)
                         <label>類別尚未建立</label>
                     @else
+                        <div class="form-group">
+                            <a href="#" class="test-primary my_category" id="c_all">全部</a>
+                        </div>
+
                         @foreach($user->shop->category as $c)
                         <div class="form-group">
-                            <a href="#" class="test-primary">{{$c->Category_Name}}</a>
+                            <a href="#" class="test-primary my_category" id="c_{{$c->id}}" >{{$c->Category_Name}}</a>
                         </div>
                         @endforeach
                     @endif
@@ -102,5 +111,8 @@
 <body>
 
 @section('app_js')
+<script>
+
+</script>
     @yield('js')
 @endsection

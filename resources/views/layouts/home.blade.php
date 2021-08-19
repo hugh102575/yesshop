@@ -147,7 +147,7 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown ">
-        <a class="nav-link text-light mx-3" href="{{route('shop.index', Auth::user()->api_token)}}"><i class="fas fa-globe"></i> 前往前台</a>
+        <a class="nav-link text-light mx-3" href="{{route('shop.index', Auth::user()->api_token)}}" target="_blank" ><i class="fas fa-globe"></i> 前往前台</a>
         </i>
         <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
