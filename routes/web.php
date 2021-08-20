@@ -41,5 +41,7 @@ Route::post('merchandise/category/{id}/delete', [MerchandiseController::class, '
 Route::get('setting/page', [SettingController::class, 'page'])->name('setting.page');
 Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
 
-Route::get('shop/{api_token}', [GuestShoppingController::class, 'index'])->name('shop.index');
+Route::get('shop/{api_token}/index/{cate_id}', [GuestShoppingController::class, 'index'])->name('shop.index');
 Route::get('shop/{api_token}/example', [GuestShoppingController::class, 'example'])->name('shop.example');
+Route::get('shop/{api_token}/login', [GuestShoppingController::class, 'login'])->name('shop.login');
+Route::get('shop/{api_token}/{id}/product', [GuestShoppingController::class, 'product'])->name('shop.product');

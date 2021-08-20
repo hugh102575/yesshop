@@ -12,6 +12,11 @@
     .enlarge_text{
     font-size: x-large !important;
 }
+form {
+   display:inline;
+   margin:0;
+   padding:0;
+}
 </style>
     @yield('css')
 @endsection
@@ -30,9 +35,9 @@
 
 @section('content')
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <a class="navbar-brand ml-3 text-light" href="#">{{$user->shop->Shop_Name}}</a>
+  <a class="navbar-brand ml-3 text-light" href="/shop/{{$user->api_token}}/index/all">{{$user->shop->Shop_Name}}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
+    <div class="btn btn-success"><span class="navbar-toggler-icon"></span></div>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -65,7 +70,11 @@
       </li>
 
     </ul>
-    <button class="btn btn-link text-success"><i class="fas fa-shopping-cart"> 購物車</i></button>
+    <form action="{{route('shop.login', Auth::user()->api_token)}}" method="GET">
+        <button class="btn btn-link text-light mr-3">登入</button>
+    </form>
+
+    <button class="btn btn-link text-success mr-3"><i class="fas fa-shopping-cart"> 購物車</i></button>
   </div>
 </nav>
 
@@ -74,7 +83,6 @@
 <div class="container-fluid py-4 px-5">
     <div class="row">
         <div class="col-sm-2  text-center ">
-
             <div class="card">
                 <div class="card-body ">
                     <div class="form-group">
@@ -85,24 +93,30 @@
                         <label>類別尚未建立</label>
                     @else
                         <div class="form-group">
+                            @if(str_contains(Route::currentRouteName(),'index'))
                             <a href="#" class="test-primary my_category" id="c_all">全部</a>
+                            @else
+                            <a href="/shop/{{$user->api_token}}/index/all" class="test-primary my_category" id="c_all">全部</a>
+                            @endif
                         </div>
 
                         @foreach($user->shop->category as $c)
                         <div class="form-group">
+                            @if(str_contains(Route::currentRouteName(),'index'))
                             <a href="#" class="test-primary my_category" id="c_{{$c->id}}" >{{$c->Category_Name}}</a>
+                            @else
+                            <a href="/shop/{{$user->api_token}}/index/{{$c->id}}" class="test-primary my_category" id="c_{{$c->id}}" >{{$c->Category_Name}}</a>
+                            @endif
+
+
                         </div>
                         @endforeach
                     @endif
                 </div>
             </div>
-
-
-
         </div>
         <div class="col-sm-10 text-center ">
-
-            @yield('stage')
+        @yield('stage')
         </div>
     </div>
 </div>

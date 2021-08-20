@@ -28,7 +28,7 @@ img {
 <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
 <!-- DataTales Example -->
-<div class="card shadow mb-4 col-lg-8 container">
+<div class="card shadow mb-4 ">
   <div class="card-header py-3 d-flex flex-row ">
     <!--<h6 class="m-0 font-weight-bold text-primary">商品列表</h6>-->
     <a href="{{ route('menu.create') }}" class="btn btn-success btn-icon-split mr-3">
