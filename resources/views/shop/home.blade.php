@@ -93,7 +93,7 @@ form {
     <button class="btn btn-link text-success mr-3"><i class="fas fa-shopping-cart"> 購物車<span class="badge badge-danger badge-counter" id="cart_count">
         @if(isset(session()->get('member')->cart))
             @php
-            $cart_count=count(session()->get('member')->cart);
+            $cart_count=count(json_decode(session()->get('member')->cart,true));
             @endphp
             {{$cart_count}}
         @endif
@@ -181,7 +181,7 @@ form {
             </div>
         </div>
         <div class="col-sm-10 text-center ">
-            {{--{{ session()->get('member') }}--}}
+           {{-- {{ session()->get('member') }} --}}
             @if(session()->has('success_msg'))
                 <div class="alert alert-success">
                     {{ session()->get('success_msg') }}

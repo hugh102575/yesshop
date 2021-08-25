@@ -2,9 +2,23 @@
 
 @section('stage')
     @if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
-    購物車{{ json_encode(session()->get('member')->cart) }}
+        @if(isset(session()->get('member')->cart))
+
+            購物車{{session()->get('member')->cart}}
+            @php
+            $my_cart=json_decode(session()->get('member')->cart);
+            @endphp
+
+
+            @foreach($my_cart as $c)
+            id={{$c->buy_id}}
+
+            @endforeach
+
+            ////////////////////////////////////////////////
+            商品{{$user->shop->merchandise}}
+        @endif
     @endif
-    ///////////////////////////商品資料{{ $user->shop->merchandise }}
 @endsection
 
 @section('js')

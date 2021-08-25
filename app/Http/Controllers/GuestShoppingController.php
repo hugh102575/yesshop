@@ -111,17 +111,20 @@ class GuestShoppingController extends Controller
            unset($request['_token']);
            if(!isset($member['cart'])){
                 array_push($cart_a,$request->all());
-                $member['cart']=$cart_a;
+                $member['cart']=json_encode($cart_a);
            }else{
-                foreach($member['cart'] as $buy){
+                foreach(json_decode($member['cart'],true) as $buy){
                     array_push($cart_a,$buy);
                 }
                 array_push($cart_a,$request->all());
-                $member['cart']=$cart_a;
+                $member['cart']=json_encode($cart_a);
            }
            $this->init_session($request,'member',$member);
+           return json_encode('updated_cart');
+        }else{
+            return json_encode('not_login');
         }
-        return json_encode('updated_cart');
+
     }
 
 

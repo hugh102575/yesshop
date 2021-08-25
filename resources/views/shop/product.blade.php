@@ -377,7 +377,12 @@ window.addEventListener('load', function () {
                 },
                 success:function(data){
                     console.log(data)
-                    window.location.reload();
+                    if(data=='updated_cart'){
+                        window.location.reload();
+                    }else if(data=='not_login'){
+                        alert('您尚未登入喔!')
+                    }
+
                 },
                 error:function(e){
                     alert('Error: ' + e);
