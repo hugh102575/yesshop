@@ -15,7 +15,9 @@
 }
 .stage_bg
 {background-color: #f0f0f0;}
-
+.shop_card:hover{
+    transform: scale(1.15);
+}
 </style>
 @endsection
 
@@ -55,7 +57,7 @@
                 li.setAttribute("class","my-3");
             var a= document.createElement('a');
                 a.setAttribute("href","/shop/"+user.api_token+"/"+item.id+"/"+"product");
-                a.setAttribute("class","card shadow mx-3");
+                a.setAttribute("class","shop_card card shadow mx-3");
             var button = document.createElement('button');
                 button.setAttribute("class","btn btn-link");
                 button.setAttribute("type","button");
