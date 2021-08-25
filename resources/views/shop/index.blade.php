@@ -11,8 +11,11 @@
 
 .serv ul li {
   list-style: none;
-  flex: 0 0 33.333%;
+  //flex: 0 0 30.333%;
 }
+.stage_bg
+{background-color: #f0f0f0;}
+
 </style>
 @endsection
 
@@ -25,7 +28,7 @@
                     <label class="font-weight-bold">商品</label>
                 </div>
                 <div class="form-group"><hr></div>
-                <div class="serv">
+                <div class="serv stage_bg">
                     <ul id="display_merchandise">
                         @if(count($user->shop->merchandise)==0)
                             <label class="container-fluid">商品尚未建立</label>
@@ -52,11 +55,12 @@
                 li.setAttribute("class","my-3");
             var a= document.createElement('a');
                 a.setAttribute("href","/shop/"+user.api_token+"/"+item.id+"/"+"product");
+                a.setAttribute("class","card shadow mx-3");
             var button = document.createElement('button');
                 button.setAttribute("class","btn btn-link");
                 button.setAttribute("type","button");
             var product_name = document.createElement('div');
-                product_name.setAttribute("class","text-primary mb-1");
+                product_name.setAttribute("class","mt-3 text-dark mb-1");
                 product_name.innerHTML=item.Product_Name;
             var product_img = document.createElement('img');
                 if(item.Product_Img!=null){
@@ -66,15 +70,16 @@
                 }
                 product_img.setAttribute('style',"height: 10rem; width: 10rem;");
             var product_price = document.createElement('div');
-                product_price.setAttribute('class','mt-3 text-secondary');
+                product_price.setAttribute('class',' mt-3');
                 if(item.Product_Price!=null){
-                    product_price.innerHTML=item.Product_Price+"元";
+                    product_price.innerHTML="<pre class='text-danger'><h5 style='display:inline;'>"+"$"+item.Product_Price+"</h5></pre>";
                 }else{
-                    product_price.innerHTML="元";
+                    product_price.innerHTML="";
                 }
 
-            button.appendChild(product_name);
+
             button.appendChild(product_img);
+            button.appendChild(product_name);
             button.appendChild(product_price);
             a.appendChild(button)
             li.appendChild(a)
