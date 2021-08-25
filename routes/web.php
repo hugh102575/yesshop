@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MerchandiseController;
 use App\Http\Controllers\GuestShoppingController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\Auth\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,7 +42,16 @@ Route::post('merchandise/category/{id}/delete', [MerchandiseController::class, '
 Route::get('setting/page', [SettingController::class, 'page'])->name('setting.page');
 Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
 
+
 Route::get('shop/{api_token}/index/{cate_id}', [GuestShoppingController::class, 'index'])->name('shop.index');
 Route::get('shop/{api_token}/example', [GuestShoppingController::class, 'example'])->name('shop.example');
-Route::get('shop/{api_token}/login', [GuestShoppingController::class, 'login'])->name('shop.login');
+Route::get('shop/{api_token}/login_form', [GuestShoppingController::class, 'login_form'])->name('shop.login_form');
+Route::post('shop/{api_token}/logout', [GuestShoppingController::class, 'logout'])->name('shop.logout');
 Route::get('shop/{api_token}/{id}/product', [GuestShoppingController::class, 'product'])->name('shop.product');
+Route::post('shop/{api_token}/register', [GuestShoppingController::class, 'register'])->name('shop.register');
+Route::post('shop/{api_token}/login', [GuestShoppingController::class, 'login'])->name('shop.login');
+Route::get('shop/{api_token}/cart', [GuestShoppingController::class, 'cart'])->name('shop.cart');
+Route::post('shop/{api_token}/add_cart', [GuestShoppingController::class, 'add_cart'])->name('shop.add_cart');
+//Route::get('shop/{api_token}/email/verify', [GuestShoppingController::class, 'verify'])->name('shop.verify');
+//Route::post('shop/{api_token}/email/resend', [GuestShoppingController::class, 'resend'])->name('shop.resend');
+//Route::get('shop/{api_token}/example', [GuestShoppingController::class, 'example'])->name('shop.example');

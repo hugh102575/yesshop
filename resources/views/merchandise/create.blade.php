@@ -67,6 +67,16 @@
     </div>
 
     <div class="form-group row">
+      <label for="Product_Describe" class="col-sm-4 col-form-label">商品介紹</label>
+      <div class="col-sm-8">
+        <textarea class="form-control"  name="Product_Describe" rows="6" placeholder="請輸入商品介紹">
+        </textarea>
+      </div>
+    </div>
+
+
+
+    <div class="form-group row">
       <label for="Product_Img" class="col-sm-4 col-form-label">商品圖片</label>
       <div class="col-sm-8">
       <input type="file" name="Product_Img">

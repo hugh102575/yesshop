@@ -9,7 +9,10 @@
 -->
 @section('app_css')
 <style>
-    .enlarge_text{
+.hidden_object{
+    display: none;
+}
+.enlarge_text{
     font-size: x-large !important;
 }
 form {
@@ -34,8 +37,19 @@ form {
 
 
 @section('content')
+
+{{--@if(  session()->has('member') && session()->get('member')->email_verified_at==null  )
+    @if(!str_contains(Route::currentRouteName(),'verify'))
+    <meta http-equiv="refresh" content="0; url=/shop/{{$user->api_token}}/email/verify" />
+    @endif
+@endif--}}
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-  <a class="navbar-brand ml-3 text-light" href="/shop/{{$user->api_token}}/index/all">{{$user->shop->Shop_Name}}</a>
+
+  <a class="navbar-brand ml-3 text-light" href="/shop/{{$user->api_token}}/index/all">
+  <i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{$user->shop->Shop_Name}}
+
+
+    </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <div class="btn btn-success"><span class="navbar-toggler-icon"></span></div>
   </button>
@@ -70,18 +84,69 @@ form {
       </li>
 
     </ul>
-    <form action="{{route('shop.login', Auth::user()->api_token)}}" method="GET">
+
+
+
+
+    @if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
+    <form action="/shop/{{$user->api_token}}/cart" method="GET">
+    <button class="btn btn-link text-success mr-3"><i class="fas fa-shopping-cart"> 購物車<span class="badge badge-danger badge-counter" id="cart_count">
+        @if(isset(session()->get('member')->cart))
+            @php
+            $cart_count=count(session()->get('member')->cart);
+            @endphp
+            {{$cart_count}}
+        @endif
+
+        </span></i>
+    </button>
+    </form>
+        {{--<a class="nav-link" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-bell fa-fw"></i>
+          <!-- Counter - Alerts -->
+          <span class="badge badge-danger badge-counter" id="littlebell_count">6</span>
+        </a>--}}
+    <div id="navbarDropdown" class="btn btn-link text-light mr-3 nav-item dropdown">
+    <!--<li class="nav-item dropdown">-->
+                                <a id="navbarDropdown" class="nav-item dropdown-toggle text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ session()->get('member')->name }}
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        會員中心
+                                    </a>
+                                    <a class="dropdown-item" href="/shop/{{$user->api_token}}/logout"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                        {{ __('Logout') }}
+                                    </a>
+
+
+                                    <form id="logout-form" action="/shop/{{$user->api_token}}/logout" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </div>
+                            <!--</li>-->
+                            </div>
+    @else
+    <form action="/shop/{{$user->api_token}}/login_form" method="GET">
         <button class="btn btn-link text-light mr-3">登入</button>
     </form>
+    @endif
 
-    <button class="btn btn-link text-success mr-3"><i class="fas fa-shopping-cart"> 購物車</i></button>
+
   </div>
 </nav>
 
 
 
 <div class="container-fluid py-4 px-5">
-    <div class="row">
+
+
+
+
+    <div class="row justify-content-center">
         <div class="col-sm-2  text-center ">
             <div class="card">
                 <div class="card-body ">
@@ -116,6 +181,53 @@ form {
             </div>
         </div>
         <div class="col-sm-10 text-center ">
+            {{--{{ session()->get('member') }}--}}
+            @if(session()->has('success_msg'))
+                <div class="alert alert-success">
+                    {{ session()->get('success_msg') }}
+                </div>
+            @endif
+            @if(session()->has('error_msg'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error_msg') }}
+                </div>
+            @endif
+            @if(session()->has('other_msg'))
+                <div class="alert alert-secondary">
+                    {{ session()->get('other_msg') }}
+                </div>
+            @endif
+            @if(session()->has('error_validation'))
+                @php
+                $error_validation=json_decode(session()->get('error_validation'),true);
+                @endphp
+
+                @foreach($error_validation as $error_v)
+
+                    @php
+                    //$error_v = str_replace("The email has already been taken.", "該email已被註冊", $error_v);
+                    $error_v = str_replace("The account must be at least 8 characters.", "帳號至少需8個字元", $error_v);
+                    $error_v = str_replace("The password must be at least 8 characters.", "密碼至少需8個字元", $error_v);
+                    $error_v = str_replace("The password confirmation does not match.", "確認密碼不相符", $error_v);
+
+
+                    @endphp
+                    @if(count($error_v)==1)
+                        <div class="alert alert-danger">
+                        {{$error_v[0]}}
+                        </div>
+                    @else
+                        @foreach($error_v as $e_v)
+                        <div class="alert alert-danger">
+                        {{$e_v}}
+                        </div>
+                        @endforeach
+                    @endif
+
+
+                @endforeach
+
+            @endif
         @yield('stage')
         </div>
     </div>

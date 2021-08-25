@@ -38,5 +38,8 @@ class shop extends Model
     public function User(){
         return $this->hasOne('App\Models\User','Shop_id','id');
     }
+    public function Member(){
+        return $this->hasMany('App\Models\Member','Shop_id','id');
+    }
 
 }

@@ -24,6 +24,7 @@ class merchandise extends Model
         'Product_Category',
         'Product_Price',
         'Product_Model',
+        'Product_Describe',
         'Product_Img',
         //'Product_forSale',
 

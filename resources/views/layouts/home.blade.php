@@ -26,7 +26,7 @@
 @endsection
 
 @section('body_bg_img')
-<body class="app is-collapsed" style="background-image: url('{{asset('img/graphs-job-laptop-papers-590016.jpg')}}');background-repeat: no-repeat;background-attachment: fixed; background-size: cover;background-color: rgba(255, 255, 255, 0.3);
+<body class="app is-collapsed" style="background-image: url('{{asset('img/graphs-job-laptop-papers-590016.jpg')}}');background-repeat: no-repeat;background-attachment: fixed; background-size: cover;background-color: rgba(255, 255, 255, 0.5);
   background-blend-mode: overlay;">
 @endsection
 

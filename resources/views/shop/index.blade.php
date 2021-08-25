@@ -18,6 +18,7 @@
 
 
 @section('stage')
+
 <div class="card shadow">
             <div class="card-body">
                 <div class="form-group">
@@ -80,6 +81,12 @@
             document.getElementById('display_merchandise').appendChild(li);
         });
     }
+    function empty_zone(){
+        var label=document.createElement('label');
+            label.setAttribute("class","container-fluid");
+            label.innerHTML="查無商品"
+            document.getElementById('display_merchandise').appendChild(label);
+    }
 
     if(document.getElementById('c_all')!=null){
         document.getElementById('c_all').classList.add('enlarge_text');
@@ -88,7 +95,12 @@
         show_my_merchandise(merchandise);
     }else{
         merchandise_filter= merchandise.filter(x => x.Product_Category==cate_id);
-        show_my_merchandise(merchandise_filter);
+        if(merchandise_filter.length!=0){
+            show_my_merchandise(merchandise_filter);
+        }else{
+            empty_zone();
+        }
+
         var my_category=document.querySelectorAll(".my_category")
         my_category.forEach(function(item,index){
             var cate_other=document.getElementById(item.id);
@@ -111,24 +123,19 @@
             cate.classList.add('enlarge_text');
             var c_id=(cate.id).replace("c_", "");
             let results= merchandise.filter(x => x.Product_Category==c_id);
-            console.log('c_id',c_id);
-            console.log(results);
-            console.log(results.length);
             document.getElementById('display_merchandise').innerHTML="";
             if(c_id=='all'){
                 show_my_merchandise(merchandise);
             }else{
-            if(results.length!=0){
-                show_my_merchandise(results);
-            }else{
-                var label=document.createElement('label');
-                label.setAttribute("class","container-fluid");
-                label.innerHTML="查無商品"
-                document.getElementById('display_merchandise').appendChild(label);
-            }
+                if(results.length!=0){
+                    show_my_merchandise(results);
+                }else{
+                    empty_zone();
+                }
             }
         })
     });
+
 
 </script>
 @endsection
