@@ -259,6 +259,13 @@ label {
             購物車{{session()->get('member')->cart}}
         @endif
     @endif--}}
+<div class="card shadow">
+<div class="card-body">
+<div class="form-group">
+<label class="font-weight-bold">購物車</label>
+</div>
+<div class="form-group"><hr></div>
+
 
 <div class="ProductCard">
 <div class="shopping-cart mt-0">
@@ -382,6 +389,9 @@ label {
     </div>
     <button class="checkout">確認訂購</button>
   </div>
+</div>
+</div>
+
 </div>
 </div>
 @endsection
