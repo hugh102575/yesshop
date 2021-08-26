@@ -4,7 +4,7 @@
 <style>
 /* Global settings */
 .ProductCard {
-  margin-top: 50px;
+  //margin-top: 50px;
   background: #CFD2CD;
   padding: 3em;
   line-height: 1.5em;
@@ -261,7 +261,7 @@ label {
     @endif--}}
 
 <div class="ProductCard">
-<div class="shopping-cart">
+<div class="shopping-cart mt-0">
   <div class="column-labels">
     <label class="product-image">Image</label>
     <label class="product-details">Product</label>
