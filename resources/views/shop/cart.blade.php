@@ -362,7 +362,7 @@ label {
                 </div>
                 <div class="product-quantity">
                 <!--value==目前要購買的商品數量-->
-                <input id="update_cart_number_{{$chart_index}}_{{$ShopCart->buy_id}}" class="update_cart_number" type="number" value="{{$ShopCart->buy_quantity}}" min="1">
+                <input id="update_cart_number_{{$chart_index}}_{{$ShopCart->buy_id}}" class="update_cart_number" type="number" value="{{$ShopCart->buy_quantity}}" min="1" max="99">
                 </div>
                 <div class="product-removal">
                 <button class="remove-product del_from_cart" id="del_from_cart_{{$chart_index}}_{{$ShopCart->buy_id}}">
@@ -459,7 +459,12 @@ $(document).ready(function() {
    var productRow = $(quantityInput).parent().parent();
    var price = parseInt(productRow.children('.product-price').text());
    var quantity = $(quantityInput).val();
-   var linePrice = price * quantity;
+   if(isNaN(price)){
+    var linePrice = 0;
+   }else{
+    var linePrice = price * quantity;
+   }
+
 
    /* Update line price display and recalc cart totals */
    productRow.children('.product-line-price').each(function () {

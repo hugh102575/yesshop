@@ -273,7 +273,7 @@ width: 150px;
                                         <i class="fas fa-minus"></i>
                                     </button>
                                 </span>
-                                <input id="buy_quantity" type="text" name="quant[1]" class="form-control input-number"  value="1" min="1" max="20">
+                                <input id="buy_quantity" type="text" name="quant[1]" class="form-control input-number"  value="1" min="1" max="99">
                                 <span class="input-group-btn" >
                                     <button type="button" class="btn btn-default btn-number border" data-type="plus" data-field="quant[1]" style="height:100%;">
                                         <!--<span class="glyphicon glyphicon-plus"></span>-->
@@ -424,7 +424,6 @@ $('.btn-number').click(function(e){
             }
 
         } else if(type == 'plus') {
-
             if(currentVal < input.attr('max')) {
                 input.val(currentVal + 1).change();
             }
