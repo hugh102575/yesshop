@@ -16,10 +16,41 @@
 .stage_bg
 {background-color: #f0f0f0;}
 .shop_card:hover{
-    transform: scale(1.15);
+    transform: scale(1.05);
 }
 </style>
 @endsection
+
+
+@section('carousel')
+{{--<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="d-block w-100 " src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg" alt="First slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 " src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg" alt="Second slide">
+    </div>
+    <div class="carousel-item">
+      <img class="d-block w-100 " src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg" alt="Third slide">
+    </div>
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>--}}
+@endsection
+
 
 
 @section('stage')
@@ -57,7 +88,7 @@
                 li.setAttribute("class","my-3");
             var a= document.createElement('a');
                 a.setAttribute("href","/shop/"+user.api_token+"/"+item.id+"/"+"product");
-                a.setAttribute("class","shop_card card shadow mx-3");
+                a.setAttribute("class","shop_card card shadow mx-3 ");
             var button = document.createElement('button');
                 button.setAttribute("class","btn btn-link");
                 button.setAttribute("type","button");
@@ -65,6 +96,7 @@
                 product_name.setAttribute("class","mt-3 text-dark mb-1");
                 product_name.innerHTML=item.Product_Name;
             var product_img = document.createElement('img');
+                product_img.setAttribute("class","p-0");
                 if(item.Product_Img!=null){
                     product_img.setAttribute('src',item.Product_Img);
                 }else{
@@ -86,6 +118,9 @@
             a.appendChild(button)
             li.appendChild(a)
             document.getElementById('display_merchandise').appendChild(li);
+
+
+
         });
     }
     function empty_zone(){

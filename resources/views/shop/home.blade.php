@@ -140,6 +140,7 @@ form {
 </nav>
 
 
+@yield('carousel')
 
 <div class="container-fluid py-4 px-5">
 
@@ -147,6 +148,7 @@ form {
 
 
     <div class="row justify-content-center">
+
         <div class="col-sm-2  text-center ">
             <div class="card">
                 <div class="card-body ">

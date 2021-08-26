@@ -126,6 +126,57 @@ class GuestShoppingController extends Controller
         }
 
     }
+    public function del_cart(Request $request,$token){
+        $del_id=$request['del_id'];
+        $del_index=$request['del_index'];
+        $cart_a=array();
+        $member=session()->get('member');
+        $cart_count=0;
+        foreach(json_decode($member['cart'],true) as $buy){
+            if($buy['buy_id']!=$del_id || $cart_count!=$del_index ){
+                array_push($cart_a,$buy);
+            }
+            $cart_count++;
+        }
+        if(count($cart_a)!=0){
+            $member['cart']=json_encode($cart_a);
+        }else{
+            $member['cart']=null;
+        }
+
+        $this->init_session($request,'member',$member);
+        return json_encode('deleted_cart');
+    }
+    public function update_cart(Request $request,$token){
+        $update_id=$request['update_id'];
+        $update_index=$request['update_index'];
+        $update_type=$request['update_type'];
+        $member=session()->get('member');
+        if($update_type=='number'){
+            $update_number=$request['update_number'];
+            $per_price=$request['per_price'];
+        }elseif($update_type=='model'){
+            $update_model=$request['update_model'];
+        }
+
+        $cart_a=array();
+        $cart_count=0;
+        foreach(json_decode($member['cart'],true) as $buy){
+            if($buy['buy_id']==$update_id  && $cart_count==$update_index){
+                if($update_type=='number'){
+                    $buy['buy_quantity']=$update_number;
+                    $buy['buy_price']=$update_number * $per_price;
+                }elseif($update_type=='model'){
+                    $buy['buy_model']=$update_model;
+                }
+            }
+            array_push($cart_a,$buy);
+            $cart_count++;
+        }
+        $member['cart']=json_encode($cart_a);
+        $this->init_session($request,'member',$member);
+        return json_encode('updateed_cart');
+    }
 
 
 

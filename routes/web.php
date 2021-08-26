@@ -52,6 +52,8 @@ Route::post('shop/{api_token}/register', [GuestShoppingController::class, 'regis
 Route::post('shop/{api_token}/login', [GuestShoppingController::class, 'login'])->name('shop.login');
 Route::get('shop/{api_token}/cart', [GuestShoppingController::class, 'cart'])->name('shop.cart');
 Route::post('shop/{api_token}/add_cart', [GuestShoppingController::class, 'add_cart'])->name('shop.add_cart');
+Route::post('shop/{api_token}/del_cart', [GuestShoppingController::class, 'del_cart'])->name('shop.del_cart');
+Route::post('shop/{api_token}/update_cart', [GuestShoppingController::class, 'update_cart'])->name('shop.update_cart');
 //Route::get('shop/{api_token}/email/verify', [GuestShoppingController::class, 'verify'])->name('shop.verify');
 //Route::post('shop/{api_token}/email/resend', [GuestShoppingController::class, 'resend'])->name('shop.resend');
 //Route::get('shop/{api_token}/example', [GuestShoppingController::class, 'example'])->name('shop.example');
