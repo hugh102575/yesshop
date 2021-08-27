@@ -78,7 +78,7 @@ form {
       </li>-->
       <li class="nav-item ">
         <form class="form-inline ml-5 my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="尋找商品" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" id="search" placeholder="尋找商品" aria-label="Search">
             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜尋</button>
         </form>
       </li>
@@ -241,6 +241,20 @@ form {
 @section('app_js')
 <script>
 
+</script>
+<style id="search_style"></style>
+<script type="text/javascript">
+var searchStyle = document.getElementById('search_style');
+document.getElementById('search')
+.addEventListener('input', function() {
+  if (!this.value) {
+    searchStyle.innerHTML = "";
+    return;
+  }
+  // look ma, no indexOf!
+  searchStyle.innerHTML = ".searchtable:not([data-index*=\"" + this.value.toLowerCase() + "\"]) { display: none; }";
+  // beware of css injections!
+});
 </script>
     @yield('js')
 @endsection

@@ -178,6 +178,11 @@ class GuestShoppingController extends Controller
         return json_encode('updateed_cart');
     }
 
+    public function checkout(Request $request,$token){
+        $user=$this->userRepo->token_index($token);
+        return view('shop.checkout',['user'=>$user]);
+    }
+
 
 
     /*public function example($token){

@@ -254,11 +254,11 @@ label {
 @endsection
 
 @section('stage')
-    {{--@if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
+    @if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
         @if(isset(session()->get('member')->cart))
             購物車{{session()->get('member')->cart}}
         @endif
-    @endif--}}
+    @endif
 <div class="card shadow">
 <div class="card-body">
 <div class="form-group">
@@ -387,7 +387,7 @@ label {
       <label style="font-weight: bold;">總金額:</label>
       <h3 style="display:inline;" class="totals-value text-danger" id="cart-subtotal">0</h3>
     </div>
-    <button class="checkout">確認訂購</button>
+    <a href="/shop/{{$user->api_token}}/checkout"><button class="checkout">確認訂購</button></a>
   </div>
 </div>
 </div>

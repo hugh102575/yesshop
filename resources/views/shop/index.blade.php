@@ -85,7 +85,8 @@
     function show_my_merchandise(obj){
         obj.forEach(function(item,index){
             var li = document.createElement('li');
-                li.setAttribute("class","my-3");
+                li.setAttribute("class","my-3 searchtable");
+                li.setAttribute("data-index",item.Product_Name);
             var a= document.createElement('a');
                 a.setAttribute("href","/shop/"+user.api_token+"/"+item.id+"/"+"product");
                 a.setAttribute("class","shop_card card shadow mx-3 ");
@@ -180,4 +181,5 @@
 
 
 </script>
+
 @endsection
