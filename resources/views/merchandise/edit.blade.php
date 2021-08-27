@@ -32,6 +32,20 @@
       </div>
     </div>
 
+    <div class="form-check  my-5">
+        <div class="col-sm-4">
+        @if($merchan->highlight)
+        <input class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" name="highlight" checked>
+        @else
+        <input class="form-check-input" type="checkbox" value="1" id="flexCheckChecked" name="highlight">
+        @endif
+        <label class="form-check-label text-primary" for="flexCheckChecked">
+            加入熱門商品
+        </label>
+        </div>
+        <small class="text-secondary ml-3">熱門商品會在首頁重點顯示</small>
+    </div>
+
     <div class="form-group row">
         <label  class="col-sm-4 col-form-label">類別</label>
         <div class="col-sm-8">
@@ -94,6 +108,8 @@
       <small>{{$merchan->Product_Img}}</small>
       </div>
     </div>
+
+
 
 
 

@@ -8,12 +8,17 @@
 用來放商店每一頁都會出現的東西，例如nav,sidebar等等
 -->
 @section('app_css')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
 <style>
 .hidden_object{
     display: none;
 }
 .enlarge_text{
     font-size: x-large !important;
+}
+.stage_bg{
+    background-color: #f0f0f0;
 }
 form {
    display:inline;
@@ -79,7 +84,7 @@ form {
       <li class="nav-item ">
         <form class="form-inline ml-5 my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" id="search" placeholder="尋找商品" aria-label="Search">
-            <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜尋</button>
+            <!--<button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜尋</button>-->
         </form>
       </li>
 
@@ -239,9 +244,7 @@ form {
 <body>
 
 @section('app_js')
-<script>
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
 <style id="search_style"></style>
 <script type="text/javascript">
 var searchStyle = document.getElementById('search_style');

@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Repositories\UserRepository;
 use App\Repositories\MerchandiseRepository;
 use App\Repositories\MemberRepository;
+use App\Repositories\OrderRepository;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use DB;
@@ -15,12 +16,14 @@ class GuestShoppingController extends Controller
     protected $userRepo;
     protected $merchanRepo;
     protected $memberRepo;
+    protected $orderRepo;
 
-    public function __construct(UserRepository $userRepo, MerchandiseRepository $merchanRepo, MemberRepository $memberRepo)
+    public function __construct(UserRepository $userRepo, MerchandiseRepository $merchanRepo, MemberRepository $memberRepo, OrderRepository $orderRepo)
     {
         $this->userRepo=$userRepo;
         $this->merchanRepo=$merchanRepo;
         $this->memberRepo=$memberRepo;
+        $this->orderRepo=$orderRepo;
     }
     public function init_session($request,$key,$value){
         $request->session()->put($key, $value);
@@ -31,6 +34,12 @@ class GuestShoppingController extends Controller
     public function index($token,$cate_id){
         $user=$this->userRepo->token_index($token);
         return view('shop.index',['user'=>$user,'cate_id'=>$cate_id]);
+    }
+    public function index_($token){
+        return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all']);
+    }
+    public function index_all($token){
+        return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all']);
     }
     public function login_form($token){
         $user=$this->userRepo->token_index($token);
@@ -101,6 +110,10 @@ class GuestShoppingController extends Controller
     }
     public function cart($token){
         $user=$this->userRepo->token_index($token);
+        if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id){
+        }else{
+            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all']);
+        }
         return view('shop.cart',['user'=>$user]);
     }
     public function add_cart(Request $request,$token){
@@ -127,6 +140,7 @@ class GuestShoppingController extends Controller
 
     }
     public function del_cart(Request $request,$token){
+        $user=$this->userRepo->token_index($token);
         $del_id=$request['del_id'];
         $del_index=$request['del_index'];
         $cart_a=array();
@@ -148,6 +162,7 @@ class GuestShoppingController extends Controller
         return json_encode('deleted_cart');
     }
     public function update_cart(Request $request,$token){
+        $user=$this->userRepo->token_index($token);
         $update_id=$request['update_id'];
         $update_index=$request['update_index'];
         $update_type=$request['update_type'];
@@ -180,7 +195,27 @@ class GuestShoppingController extends Controller
 
     public function checkout(Request $request,$token){
         $user=$this->userRepo->token_index($token);
+        if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id){
+        }else{
+            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all']);
+        }
         return view('shop.checkout',['user'=>$user]);
+    }
+
+    public function order(Request $request,$token){
+        $user=$this->userRepo->token_index($token);
+        $member=session()->get('member');
+        $request['Shop_id']=$user->Shop_id;
+        $request['Member_id']=$member['id'];
+        $request['order_content'] = json_encode($member['cart']);
+        $result=$this->orderRepo->create($request->all());
+        $member['cart']=null;
+        if($result){
+            $this->init_session($request,'member',$member);
+            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all'])->with('success_msg', '訂購成功！請在「訂單查詢」確認');
+        }else{
+            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all'])->with('error_msg', '訂購失敗！麻煩請再試一次');
+        }
     }
 
 

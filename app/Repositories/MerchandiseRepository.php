@@ -18,6 +18,11 @@ class MerchandiseRepository
         $data['create_from']=Auth::user()->email;
         $data['created_at']=$now;
         $data['Product_Img']=$this->store_image(request(),'merchandise','Product_Img','Product_Old_Img');
+        if(isset($data['highlight'])){
+            $data['highlight']="1";
+        }else{
+            $data['highlight']="0";
+        }
         return  merchandise::create($data);
     }
 
@@ -26,6 +31,11 @@ class MerchandiseRepository
         $data['update_from']=Auth::user()->email;
         $data['updated_at']=$now;
         $data['Product_Img']=$this->store_image(request(),'merchandise','Product_Img','Product_Old_Img');
+        if(isset($data['highlight'])){
+            $data['highlight']="1";
+        }else{
+            $data['highlight']="0";
+        }
         $merchan_id = merchandise::find($id);
         return  $merchan_id ? $merchan_id->update($data) : false;
     }

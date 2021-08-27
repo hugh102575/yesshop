@@ -1,7 +1,7 @@
 @extends('shop.home')
 
 @section('css')
-
+<link href="{{asset('css/carousel.css')}}" rel="stylesheet">
 <style>
 
 /*****************globals*************/
@@ -185,6 +185,7 @@ width: 150px;
 
 /*# sourceMappingURL=style.css.map */
 
+
 </style>
 @endsection
 
@@ -309,43 +310,212 @@ width: 150px;
 		</div>
 	</div>
 
+@if($product->Product_Category != 'none')
+<div class="viewed  ">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="bbb_viewed_title_container">
+
+                    @foreach($user->shop->category as $cate)
+                    @if($cate->id == $product->Product_Category )
+                    <h5 class="bbb_viewed_title row text-secondary" ><a href="/shop/{{$user->api_token}}/index/{{$cate->id}}"><h3>{{$cate->Category_Name}}</h3></a><span>您還可以參考</span></h5>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+                    @endif
+                    @endforeach
+
+                </div>
+                <div class="bbb_viewed_slider_container py-3 ">
+                    <div class="owl-carousel owl-theme bbb_viewed_slider">
+                        @foreach($user->shop->merchandise as $merc)
+                        @if($merc->Product_Category == $product->Product_Category  )
+                        @if($merc->id != $product->id)
+                        <div class="owl-item">
+                            <a class="" href="/shop/{{$user->api_token}}/{{$merc->id}}/product">
+                            <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="{{$merc->Product_Img}}" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                <div class="bbb_viewed_name">{{$merc->Product_Name}}</div>
+                                    <div class="bbb_viewed_price">${{$merc->Product_Price}}</div>
+
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                        @endif
+                        @endif
+                        @endforeach
+                         <!--<div class="owl-item">
+                            <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹12225<span>₹13300</span></div>
+                                    <div class="bbb_viewed_name"><a href="#">Alkatel Phone</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924221/51_be7qfhil.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹30079</div>
+                                    <div class="bbb_viewed_name"><a href="#">Samsung LED</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924241/8fbb415a2ab2a4de55bb0c8da73c4172--ps.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹22250</div>
+                                    <div class="bbb_viewed_name"><a href="#">Samsung Mobile</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924275/images.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹1379</div>
+                                    <div class="bbb_viewed_name"><a href="#">Huawei Power</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924361/21HmjI5eVcL.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹225<span>₹300</span></div>
+                                    <div class="bbb_viewed_name"><a href="#">Sony Power</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924241/8fbb415a2ab2a4de55bb0c8da73c4172--ps.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹13275</div>
+                                    <div class="bbb_viewed_name"><a href="#">Speedlink Mobile</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif
 @endsection
 
 @section('js')
 <script>
+
+$(document).ready(function()
+{
+
+
+if($('.bbb_viewed_slider').length)
+{
+var viewedSlider = $('.bbb_viewed_slider');
+
+viewedSlider.owlCarousel(
+{
+loop:false,
+margin:30,
+autoplay:true,
+autoplayTimeout:6000,
+nav:false,
+dots:false,
+responsive:
+{
+0:{items:1},
+575:{items:2},
+768:{items:3},
+991:{items:4},
+1199:{items:6}
+}
+});
+
+if($('.bbb_viewed_prev').length)
+{
+var prev = $('.bbb_viewed_prev');
+prev.on('click', function()
+{
+viewedSlider.trigger('prev.owl.carousel');
+});
+}
+
+if($('.bbb_viewed_next').length)
+{
+var next = $('.bbb_viewed_next');
+next.on('click', function()
+{
+viewedSlider.trigger('next.owl.carousel');
+});
+}
+}
+
+
+});
+
+
 var user={!! json_encode($user) !!};
 var product={!! json_encode($product) !!};
 var add_to_cart=document.getElementById('add_to_cart');
 var model=JSON.parse(product.Product_Model);
-if(model!=null){
-
-    var model_div = document.createElement('div');
-    model_div.setAttribute("class","mb-5");
-    document.getElementById('product_category_div').appendChild(model_div);
-    model.forEach(function(item,index){
-        console.log('item',item.value)
-        var div = document.createElement('div');
-        div.setAttribute("class","form-check form-check-inline mx-3");
-        var input= document.createElement('input');
-        input.setAttribute("class","form-check-input ");
-        input.setAttribute("type","checkbox");
-        input.setAttribute("name","product_model");
-        input.setAttribute("id","inlineCheckbox_"+(index+1));
-        input.setAttribute("value",index);
-        var label= document.createElement('label');
-        label.setAttribute("class","form-check-label h5 text-primary");
-        label.setAttribute("for","inlineCheckbox_"+(index+1));
-        label.innerHTML=item.value;
-        div.appendChild(input);
-        div.appendChild(label);
-        //document.getElementById('product_category_div').appendChild(div);
-        model_div.appendChild(div);
-    });
-}
-
 
 window.addEventListener('load', function () {
-
+    if(model!=null){
+        var model_div = document.createElement('div');
+        model_div.setAttribute("class","mb-5");
+        document.getElementById('product_category_div').appendChild(model_div);
+            model.forEach(function(item,index){
+                console.log('item',item.value)
+                var div = document.createElement('div');
+                div.setAttribute("class","form-check form-check-inline mx-3");
+                var input= document.createElement('input');
+                input.setAttribute("class","form-check-input ");
+                input.setAttribute("type","checkbox");
+                input.setAttribute("name","product_model");
+                input.setAttribute("id","inlineCheckbox_"+(index+1));
+                input.setAttribute("value",index);
+                var label= document.createElement('label');
+                label.setAttribute("class","form-check-label h5 text-primary");
+                label.setAttribute("for","inlineCheckbox_"+(index+1));
+                label.innerHTML=item.value;
+                div.appendChild(input);
+                div.appendChild(label);
+                model_div.appendChild(div);
+            });
+    }
     $('input[type="checkbox"]').on('change', function() {
         $('input[type="checkbox"]').not(this).prop('checked', false);
     });
@@ -400,7 +570,10 @@ window.addEventListener('load', function () {
         }
 
     });
+
+
 });
+
 
 
 

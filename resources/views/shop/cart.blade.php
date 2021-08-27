@@ -254,11 +254,11 @@ label {
 @endsection
 
 @section('stage')
-    @if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
+    {{--@if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
         @if(isset(session()->get('member')->cart))
             購物車{{session()->get('member')->cart}}
         @endif
-    @endif
+    @endif--}}
 <div class="card shadow">
 <div class="card-body">
 <div class="form-group">

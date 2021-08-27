@@ -2,6 +2,7 @@
 
 
 @section('css')
+<link href="{{asset('css/carousel.css')}}" rel="stylesheet">
 <style>
 .serv ul {
   display: flex;
@@ -13,42 +14,147 @@
   list-style: none;
   //flex: 0 0 30.333%;
 }
-.stage_bg
-{background-color: #f0f0f0;}
+
 .shop_card:hover{
     transform: scale(1.05);
 }
 </style>
 @endsection
 
+@php
+$highlight_count=0;
+foreach($user->shop->merchandise as $mmmm){
+    if($mmmm->highlight==1){
+        $highlight_count++;
+    }
+}
 
+@endphp
 @section('carousel')
-{{--<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-  <ol class="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img class="d-block w-100 " src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg" alt="First slide">
+@if($highlight_count!=0)
+<div class="viewed  pt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="bbb_viewed_title_container">
+
+
+                    <h5 class="bbb_viewed_title row text-secondary">熱門商品</h5>
+                    <div class="bbb_viewed_nav_container">
+                        <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                        <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                    </div>
+
+
+                </div>
+                <div class="bbb_viewed_slider_container py-3 ">
+                    <div class="owl-carousel owl-theme bbb_viewed_slider">
+
+                        @foreach($user->shop->merchandise as $merc)
+                        @if($merc->highlight)
+                        <div class="owl-item">
+                            <a class="" href="/shop/{{$user->api_token}}/{{$merc->id}}/product">
+                            <div class="  bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="{{$merc->Product_Img}}" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_name">{{$merc->Product_Name}}</div>
+                                    <pre class="bbb_viewed_price">${{$merc->Product_Price}}</pre>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount"><span>熱門</span></li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                            </a>
+                        </div>
+                        @endif
+                        @endforeach
+
+                        {{--<div class="owl-item">
+                            <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924153/alcatel-smartphones-einsteiger-mittelklasse-neu-3m.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹12225<span>₹13300</span></div>
+                                    <div class="bbb_viewed_name"><a href="#">Alkatel Phone</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924221/51_be7qfhil.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹30079</div>
+                                    <div class="bbb_viewed_name"><a href="#">Samsung LED</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924241/8fbb415a2ab2a4de55bb0c8da73c4172--ps.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹22250</div>
+                                    <div class="bbb_viewed_name"><a href="#">Samsung Mobile</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item is_new d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924275/images.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹1379</div>
+                                    <div class="bbb_viewed_name"><a href="#">Huawei Power</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924361/21HmjI5eVcL.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹225<span>₹300</span></div>
+                                    <div class="bbb_viewed_name"><a href="#">Sony Power</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="owl-item">
+                            <div class="bbb_viewed_item d-flex flex-column align-items-center justify-content-center text-center">
+                                <div class="bbb_viewed_image"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560924241/8fbb415a2ab2a4de55bb0c8da73c4172--ps.jpg" alt=""></div>
+                                <div class="bbb_viewed_content text-center">
+                                    <div class="bbb_viewed_price">₹13275</div>
+                                    <div class="bbb_viewed_name"><a href="#">Speedlink Mobile</a></div>
+                                </div>
+                                <ul class="item_marks">
+                                    <li class="item_mark item_discount">-25%</li>
+                                    <li class="item_mark item_new">new</li>
+                                </ul>
+                            </div>
+                        </div>--}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="carousel-item">
-      <img class="d-block w-100 " src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg" alt="Second slide">
-    </div>
-    <div class="carousel-item">
-      <img class="d-block w-100 " src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg" alt="Third slide">
-    </div>
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>--}}
+</div>
+@endif
 @endsection
 
 
@@ -103,7 +209,7 @@
                 }else{
                     product_img.setAttribute('src',"");
                 }
-                product_img.setAttribute('style',"height: 10rem; width: 10rem;");
+                product_img.setAttribute('style',"height: 8rem; width: 8rem;");
             var product_price = document.createElement('div');
                 product_price.setAttribute('class',' mt-3');
                 if(item.Product_Price!=null){
@@ -180,6 +286,55 @@
     });
 
 
+
+
+    $(document).ready(function()
+{
+
+
+if($('.bbb_viewed_slider').length)
+{
+var viewedSlider = $('.bbb_viewed_slider');
+
+viewedSlider.owlCarousel(
+{
+loop:false,
+margin:30,
+autoplay:true,
+autoplayTimeout:6000,
+nav:false,
+dots:false,
+responsive:
+{
+0:{items:1},
+575:{items:2},
+768:{items:3},
+991:{items:4},
+1199:{items:6}
+}
+});
+
+if($('.bbb_viewed_prev').length)
+{
+var prev = $('.bbb_viewed_prev');
+prev.on('click', function()
+{
+viewedSlider.trigger('prev.owl.carousel');
+});
+}
+
+if($('.bbb_viewed_next').length)
+{
+var next = $('.bbb_viewed_next');
+next.on('click', function()
+{
+viewedSlider.trigger('next.owl.carousel');
+});
+}
+}
+
+
+});
 </script>
 
 @endsection
