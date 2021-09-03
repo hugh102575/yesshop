@@ -35,6 +35,7 @@ Route::get('merchandise/{id}/edit', [MerchandiseController::class, 'edit'])->nam
 Route::post('merchandise/store', [MerchandiseController::class, 'store'])->name('menu.store');
 Route::post('merchandise/{id}/update', [MerchandiseController::class, 'update'])->name('menu.update');
 Route::post('merchandise/{id}/delete', [MerchandiseController::class, 'delete'])->name('menu.delete');
+Route::post('merchandise/delete_others_img', [MerchandiseController::class, 'delete_others_img'])->name('menu.delete_others_img');
 Route::get('merchandise/category', [MerchandiseController::class, 'category'])->name('category');
 Route::post('merchandise/category/store', [MerchandiseController::class, 'category_store'])->name('category.store');
 Route::post('merchandise/category/{id}/update', [MerchandiseController::class, 'category_update'])->name('category.update');

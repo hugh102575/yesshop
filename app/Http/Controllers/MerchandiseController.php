@@ -135,4 +135,25 @@ class MerchandiseController extends Controller
             return redirect()->route('category')->with('error_msg', '類別刪除失敗！');
         }*/
     }
+    public function delete_others_img(Request $request){
+        //return json_encode($request->all());
+        $others_id=$request['others_id'];
+        $merchan=$this->merchanRepo->find($request['id']);
+        switch($others_id){
+            case '1':
+                $others_img=$merchan->Product_Img_others_1;
+                break;
+            case '2':
+                $others_img=$merchan->Product_Img_others_2;
+                break;
+            case '3':
+                $others_img=$merchan->Product_Img_others_3;
+                break;
+            case '4':
+                $others_img=$merchan->Product_Img_others_4;
+                break;
+        }
+        $result=$this->merchanRepo->delete_others_img($request['id'],$others_img,$others_id);
+        return json_encode($result);
+    }
 }

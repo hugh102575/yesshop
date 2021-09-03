@@ -86,4 +86,16 @@ class MerchandiseRepository
             Storage::disk('public')->delete($oldurl);
         }
     }
+    public function delete_others_img($id,$others_img,$others_id){
+        $oldurl = str_replace("/storage"."/", "", $others_img);
+        if (Storage::disk('public')->exists($oldurl)) {
+            Storage::disk('public')->delete($oldurl);
+            $data['Product_Img_others_'.$others_id]=null;
+            $merchan_id = merchandise::find($id);
+            return  $merchan_id ? $merchan_id->update($data) : false;
+        }else{
+            return false;
+        }
+
+    }
 }

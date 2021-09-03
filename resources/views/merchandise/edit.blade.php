@@ -111,11 +111,16 @@
 
     <div class="form-group row">
       <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(1)</label>
+
       <div class="col-sm-8">
       <input type="file" name="Product_Img_others_1">
+      @if($merchan->Product_Img_others_1!=null)
+      <button id="del_Product_Old_Img_others_1" type="button" class="btn btn-link text-danger del_Product_Old_Img_others"><small>刪除此圖片</small></button>
+      @endif
       <input class="hidden_object" name="Product_Old_Img_others_1" value="{{$merchan->Product_Img_others_1}}">
       <img src="{{$merchan->Product_Img_others_1}}"  style="max-height: 10rem; max-width: 10rem;">
       <small>{{$merchan->Product_Img_others_1}}</small>
+
       </div>
     </div>
 
@@ -123,6 +128,9 @@
       <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(2)</label>
       <div class="col-sm-8">
       <input type="file" name="Product_Img_others_2">
+      @if($merchan->Product_Img_others_2!=null)
+      <button id="del_Product_Old_Img_others_2" type="button" class="btn btn-link text-danger del_Product_Old_Img_others"><small>刪除此圖片</small></button>
+      @endif
       <input class="hidden_object" name="Product_Old_Img_others_2" value="{{$merchan->Product_Img_others_2}}">
       <img src="{{$merchan->Product_Img_others_2}}"  style="max-height: 10rem; max-width: 10rem;">
       <small>{{$merchan->Product_Img_others_2}}</small>
@@ -133,6 +141,9 @@
       <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(3)</label>
       <div class="col-sm-8">
       <input type="file" name="Product_Img_others_3">
+      @if($merchan->Product_Img_others_3!=null)
+      <button id="del_Product_Old_Img_others_3" type="button" class="btn btn-link text-danger del_Product_Old_Img_others"><small>刪除此圖片</small></button>
+      @endif
       <input class="hidden_object" name="Product_Old_Img_others_3" value="{{$merchan->Product_Img_others_3}}">
       <img src="{{$merchan->Product_Img_others_3}}"  style="max-height: 10rem; max-width: 10rem;">
       <small>{{$merchan->Product_Img_others_3}}</small>
@@ -143,6 +154,9 @@
       <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(4)</label>
       <div class="col-sm-8">
       <input type="file" name="Product_Img_others_4">
+      @if($merchan->Product_Img_others_4!=null)
+      <button id="del_Product_Old_Img_others_4" type="button" class="btn btn-link text-danger del_Product_Old_Img_others"><small>刪除此圖片</small></button>
+      @endif
       <input class="hidden_object" name="Product_Old_Img_others_4" value="{{$merchan->Product_Img_others_4}}">
       <img src="{{$merchan->Product_Img_others_4}}"  style="max-height: 10rem; max-width: 10rem;">
       <small>{{$merchan->Product_Img_others_4}}</small>
@@ -251,6 +265,32 @@ $('#menu_edit_delete').click(function(){
                 }
 
             })
+var del_Product_Old_Img_others=document.querySelectorAll(".del_Product_Old_Img_others")
+del_Product_Old_Img_others.forEach(function(item,index){
+    var del_others_img_btn=document.getElementById(item.id);
+    del_others_img_btn.addEventListener("click", function() {
+        var others_id=(del_others_img_btn.id).replace("del_Product_Old_Img_others_", "");
+        var merchan_id = merchan.id;
+        $.ajax({
+                        type:'POST',
+                        url:'/merchandise/delete_others_img',
+                        dataType:'json',
+                        data:{
+                            _token: '{{csrf_token()}}',
+                            'id' : merchan_id,
+                            'others_id' : others_id
+                        },
+                        success:function(data){
+                            //console.log(data);
+                            window.location.reload();
+                        },
+                        error:function(e){
+                            alert('Error: ' + e);
+                        }
+                    });
+    });
+});
+
 </script>
 @endsection
 
