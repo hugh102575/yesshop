@@ -74,8 +74,7 @@ class RegisterController extends Controller
             'create_from' => $data['email'],
             'created_at' =>  $now
         ]);
-        $my_shop = Shop::where('Shop_Name',$data['shop'])->first();
-
+        $my_shop = Shop::where('create_from',$data['email'])->first();
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

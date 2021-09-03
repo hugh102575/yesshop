@@ -25,8 +25,15 @@ class shop extends Model
         'update_from',
         'created_at',
         'updated_at',
-        'bg_img'
+        'bg_img',
         //'Category'
+        'manager_phone',
+        'manager_name',
+        'manager_gender',
+        'bank_name',
+        'bank_port',
+        'card_number',
+        'ship_tax'
     ];
 
     public function merchandise(){
@@ -40,6 +47,9 @@ class shop extends Model
     }
     public function Member(){
         return $this->hasMany('App\Models\Member','Shop_id','id');
+    }
+    public function order(){
+        return $this->hasMany('App\Models\order','Shop_id','id');
     }
 
 }

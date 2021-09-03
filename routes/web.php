@@ -40,7 +40,14 @@ Route::post('merchandise/category/store', [MerchandiseController::class, 'catego
 Route::post('merchandise/category/{id}/update', [MerchandiseController::class, 'category_update'])->name('category.update');
 Route::post('merchandise/category/{id}/delete', [MerchandiseController::class, 'category_delete'])->name('category.delete');
 Route::get('setting/page', [SettingController::class, 'page'])->name('setting.page');
-Route::post('setting/update', [SettingController::class, 'update'])->name('setting.update');
+Route::get('setting/admin_info', [SettingController::class, 'admin_info'])->name('setting.admin_info');
+Route::get('setting/member', [SettingController::class, 'member'])->name('setting.member');
+Route::get('setting/order', [SettingController::class, 'order'])->name('setting.order');
+Route::get('setting/{id}/order_edit', [SettingController::class, 'order_edit'])->name('setting.order_edit');
+Route::post('setting/{id}/order_update', [SettingController::class, 'order_update'])->name('setting.order_update');
+Route::post('setting/admin_update', [SettingController::class, 'admin_update'])->name('setting.admin_update');
+Route::post('setting/page_update', [SettingController::class, 'page_update'])->name('setting.page_update');
+Route::get('setting/get_order', [SettingController::class, 'get_order'])->name('setting.get_order');
 
 Route::get('shop/{api_token}', [GuestShoppingController::class, 'index_']);
 Route::get('shop/{api_token}/index', [GuestShoppingController::class, 'index_all']);
@@ -57,6 +64,10 @@ Route::post('shop/{api_token}/del_cart', [GuestShoppingController::class, 'del_c
 Route::post('shop/{api_token}/update_cart', [GuestShoppingController::class, 'update_cart'])->name('shop.update_cart');
 Route::get('shop/{api_token}/checkout', [GuestShoppingController::class, 'checkout'])->name('shop.checkout');
 Route::post('shop/{api_token}/order', [GuestShoppingController::class, 'order'])->name('shop.order');
+Route::get('shop/{api_token}/order', [GuestShoppingController::class, 'my_order'])->name('shop.my_order');
+Route::post('shop/{api_token}/{id}/order_update', [GuestShoppingController::class, 'order_update'])->name('shop.order_update');
+Route::get('shop/{api_token}/my_info', [GuestShoppingController::class, 'my_info'])->name('shop.my_info');
+Route::post('shop/{api_token}/my_update', [GuestShoppingController::class, 'my_update'])->name('shop.my_update');
 
 //Route::get('shop/{api_token}/email/verify', [GuestShoppingController::class, 'verify'])->name('shop.verify');
 //Route::post('shop/{api_token}/email/resend', [GuestShoppingController::class, 'resend'])->name('shop.resend');

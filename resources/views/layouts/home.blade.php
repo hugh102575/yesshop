@@ -26,11 +26,12 @@
 @endsection
 
 @section('body_bg_img')
-<body class="app is-collapsed" style="background-image: url('{{asset('img/graphs-job-laptop-papers-590016.jpg')}}');background-repeat: no-repeat;background-attachment: fixed; background-size: cover;background-color: rgba(255, 255, 255, 0.5);
-  background-blend-mode: overlay;">
+<body id="back_home_body"class="app" style="background-image: url('{{asset('img/graphs-job-laptop-papers-590016.jpg')}}');background-repeat: no-repeat;background-attachment: fixed; background-size: cover;background-color: rgba(255, 255, 255, 0.5);
+  background-blend-mode: overlay;"><!-- class: is-collapsed-->
 @endsection
 
 @section('content')
+
 <div class="sidebar">
   <div class="sidebar-inner">
     <ul class="sidebar-menu scrollable position-relative pt-3">
@@ -52,7 +53,7 @@
         </a>
 
         @php
-        if(preg_match('(page)', Route::currentRouteName()) === 1) {
+        if(preg_match('(setting.page|setting.admin_info|setting.order|setting.member)', Route::currentRouteName()) === 1) {
             $setting_dropdown=true;
         }else{
             $setting_dropdown=false;
@@ -65,7 +66,22 @@
         @endif
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle " href="#">
-              <span><a href="{{route('setting.page')}}" class="{{ (str_contains(Route::currentRouteName(),'setting')) ? 'text-success enlarge_text' : '' }}">布景設定</a></span>
+              <span><a href="{{route('setting.admin_info')}}" class="{{ (str_contains(Route::currentRouteName(),'setting.admin_info')) ? 'text-success enlarge_text' : '' }}">商家資訊</a></span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#">
+              <span><a href="{{route('setting.order')}}" class="{{ (str_contains(Route::currentRouteName(),'setting.order')) ? 'text-success enlarge_text' : '' }}">訂單管理</a></span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#">
+              <span><a href="{{route('setting.member')}}" class="{{ (str_contains(Route::currentRouteName(),'setting.member')) ? 'text-success enlarge_text' : '' }}">會員一覽</a></span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle " href="#">
+              <span><a href="{{route('setting.page')}}" class="{{ (str_contains(Route::currentRouteName(),'setting.page')) ? 'text-success enlarge_text' : '' }}">布景設定</a></span>
             </a>
           </li>
         </ul>
@@ -138,14 +154,18 @@
       </li>
       <li class="nav-item" >
         <!--<a class="nav-link text-light" href="#" id='nav_title'></a>-->
-        <h3 class="nav-link text-light vertical-center"  id='nav_title'></h3>
+        <h3 class="nav-link text-light "  id='nav_title'></h3>
       </li>
       <!--<li class="nav-item">
         <a class="nav-link" href="#">Link</a>
       </li>-->
+
     </ul>
 
     <ul class="navbar-nav ml-auto">
+        <li class="nav-item" >
+            <a class="nav-link text-light" href="{{route('setting.order')}}" id='nav_order'>訂單<span class="badge badge-danger badge-counter" id="update_order"><span class="hidden_object"></span></span></a>
+        </li>
         <li class="nav-item dropdown ">
         <a class="nav-link text-light mx-3" href="/shop/{{Auth::user()->api_token}}/index/all" target="_blank" ><i class="fas fa-globe"></i> 前往前台</a>
         </i>
@@ -190,8 +210,10 @@ function change_toggle(){
     const max_width=991;
     if(window.innerWidth<=max_width){
         $('#close_sidebar_btn').show();
+
     }else{
         $('#close_sidebar_btn').hide();
+
     }
 }
 change_toggle();
@@ -202,6 +224,34 @@ toggle.addEventListener('click', function(event){
 window.addEventListener('resize', function(event){
     change_toggle();
 });
+
+function ajax_get_order(){
+    $.ajax({
+        type:'GET',
+        url:'/setting/get_order',
+        dataType:"json",
+        success:function(data){
+            var new_order_count=0;
+            data.forEach(function(item,index){
+                if(item.finished_status != '1'){
+                    new_order_count++;
+                }
+            });
+
+            if(document.getElementById('update_order').innerHTML != new_order_count){
+                document.getElementById('update_order').innerHTML=new_order_count;
+            }
+        },
+        error:function(e){
+        }
+    });
+}
+
+ajax_get_order();
+const time_interval=1000*3; //毫秒
+    setInterval(function(){
+        ajax_get_order();
+    }, time_interval);
 
 </script>
 @yield('js')

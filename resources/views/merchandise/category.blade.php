@@ -12,16 +12,7 @@ img {
 
 
 @section('stage')
-    @if(session()->has('success_msg'))
-        <div class="alert alert-success">
-            {{ session()->get('success_msg') }}
-        </div>
-    @endif
-    @if(session()->has('error_msg'))
-        <div class="alert alert-danger">
-            {{ session()->get('error_msg') }}
-        </div>
-    @endif
+
 <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
 <div class="modal fade" id="CategoryModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -89,22 +80,32 @@ img {
 </div>
 
 
-<div class="container-fluid " >
+<div class="container-fluid col-sm-8" >
+@if(session()->has('success_msg'))
+        <div class="alert alert-success">
+            {{ session()->get('success_msg') }}
+        </div>
+    @endif
+    @if(session()->has('error_msg'))
+        <div class="alert alert-danger">
+            {{ session()->get('error_msg') }}
+        </div>
+    @endif
 <!-- Page Heading -->
 <!--<h1 class="h3 mb-2 text-light shadow-lg text-center">商品列表</h1>-->
 <!--<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>-->
 
 <!-- DataTales Example -->
-<div class="card shadow mb-4 col-lg-8 container">
-  <div class="card-header py-3 d-flex flex-row ">
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex flex-row ">
     <!--<h6 class="m-0 font-weight-bold text-primary">商品列表</h6>-->
     <!--<a href="" type="button" class="btn btn-success btn-icon-split mr-3">
         <i class="fas fa-plus"></i> 新增類別
     </a>-->
 
+    <h5 class="font-weight-bold text-success mr-5">類別</h5>
     <button type="button" class="btn btn-success btn-icon-split mr-3" data-target="#CategoryModal" data-toggle="modal"><i class="fas fa-plus"></i> 新增類別 </button>
-    </a>
-  </div>
+    </div>
   <div class="card-body">
   <div class="table-responsive">
       <table class="table  table-hover text-center text-middle" id="dataTable" width="100%" cellspacing="0">

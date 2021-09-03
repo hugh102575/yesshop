@@ -551,6 +551,7 @@ window.addEventListener('load', function () {
                         window.location.reload();
                     }else if(data=='not_login'){
                         alert('您尚未登入喔!')
+                        window.location.href='/shop/'+user.api_token+'/'+'login_form';
                     }
 
                 },

@@ -31,11 +31,10 @@ img {
 <div class="card shadow mb-4 ">
   <div class="card-header py-3 d-flex flex-row ">
     <!--<h6 class="m-0 font-weight-bold text-primary">商品列表</h6>-->
+    <h5 class="font-weight-bold text-success mr-5">商品列表</h5>
     <a href="{{ route('menu.create') }}" class="btn btn-success btn-icon-split mr-3">
         <i class="fas fa-plus"></i> 新增商品
     </a>
-    <a class="btn btn-link text-secondary">匯入</a>
-    <a class="btn btn-link text-secondary">匯出</a>
   </div>
   <div class="card-body">
     <div class="table-responsive">

@@ -32,8 +32,8 @@ foreach($user->shop->merchandise as $mmmm){
 @endphp
 @section('carousel')
 @if($highlight_count!=0)
-<div class="viewed  pt-5">
-    <div class="container">
+<div class="viewed pt-5 px-5">
+    <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="bbb_viewed_title_container">
@@ -303,14 +303,15 @@ margin:30,
 autoplay:true,
 autoplayTimeout:6000,
 nav:false,
-dots:false,
+dots:true,
 responsive:
 {
 0:{items:1},
 575:{items:2},
 768:{items:3},
 991:{items:4},
-1199:{items:6}
+1199:{items:6},
+1399:{items:7}
 }
 });
 

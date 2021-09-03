@@ -5,6 +5,7 @@
 /* Global settings */
 
 
+
 .product-image {
   float: left;
   width: 20%;
@@ -254,7 +255,7 @@ label {
 @section('stage')
 
 <div class="card shadow">
-    <div class="card-body">
+    <div class="card-body stage_bg">
         <div class="form-group">
         <label class="font-weight-bold">結帳</label>
         </div>
@@ -274,7 +275,6 @@ label {
     <label class="product-line-price">總價</label>
   </div>
 
-  @if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
         @if(isset(session()->get('member')->cart))
             @php
             $my_cart=json_decode(session()->get('member')->cart);
@@ -365,7 +365,6 @@ label {
             </div>
             @endforeach
         @endif
-    @endif
 
 
 </div>
@@ -384,8 +383,8 @@ label {
   <div class="col-lg-8 mb-4">
 
     <!-- Card -->
-    <div class="card wish-list pb-1">
-      <div class="card-body">
+    <div class="card wish-list pb-1 ">
+      <div class="card-body ">
 
         <h5 class="mb-2">購買資訊</h5>
 
@@ -398,8 +397,7 @@ label {
             <!-- First name -->
             <div class="md-form md-outline mb-0 mb-lg-4 text-left">
                 <label for="Name" >收件人</label><span class="text-danger">*</span>
-              <input type="text" id="Name" name="order_name"  placeholder="請輸入收件人姓名" class="form-control mb-0 mb-lg-2" required>
-
+                <input type="text" id="Name" name="order_name"  placeholder="請輸入收件人姓名" class="form-control mb-0 mb-lg-2" value="{{session()->get('member')->name}}" required>
             </div>
 
           </div>
@@ -413,20 +411,20 @@ label {
         <!-- Address -->
         <div class="md-form md-outline mt-0 text-left mb-lg-4">
             <label for="address">地址</label><span class="text-danger">*</span>
-            <input type="text" id="address" name="order_address" placeholder="請輸入地址" class="form-control" required>
+            <input type="text" id="address" name="order_address" placeholder="請輸入地址" class="form-control" required value="{{session()->get('member')->member_address}}">
         </div>
 
         <!-- Phone -->
         <div class="md-form md-outline text-left mb-lg-4">
             <label for="phone">連絡電話</label><span class="text-danger">*</span>
-            <input type="number" id="phone" name="order_phone" placeholder="請輸入聯絡電話" class="form-control" required>
+            <input type="number" id="phone" name="order_phone" placeholder="請輸入聯絡電話" class="form-control" required value="{{session()->get('member')->member_phone}}">
 
         </div>
 
         <!-- Email address -->
         <div class="md-form md-outline text-left mb-lg-4">
             <label for="Email_address">電子郵件</label>
-            <input type="email" id="form19" name="order_email" placeholder="請輸入電子郵件" class="form-control">
+            <input type="email" id="form19" name="order_email" placeholder="請輸入電子郵件" class="form-control" value="{{session()->get('member')->member_email}}">
         </div>
 
         <!-- Additional information -->

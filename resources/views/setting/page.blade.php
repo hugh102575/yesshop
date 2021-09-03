@@ -19,7 +19,7 @@
             {{ session()->get('error_msg') }}
         </div>
     @endif
-    <form action="{{ route('setting.update') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('setting.page_update') }}" method="POST" enctype="multipart/form-data">
     @csrf
         <div class="card shadow mb-4 ">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">

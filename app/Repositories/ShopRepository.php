@@ -10,11 +10,13 @@ class ShopRepository
 {
     public function update($request,array $data){
         $now = date('Y-m-d H:i:s');
-        if($request->has('del_bg_btn')){
-            $this->delete_old_img($data['bg_old_img']);
-            $data['bg_img']=null;
-        }else{
-            $data['bg_img']=$this->store_image(request(),'background','bg_img','bg_old_img');
+        if($request->has('bg_old_img')){
+            if($request->has('del_bg_btn')){
+                $this->delete_old_img($data['bg_old_img']);
+                $data['bg_img']=null;
+            }else{
+                $data['bg_img']=$this->store_image(request(),'background','bg_img','bg_old_img');
+            }
         }
         $data['update_from']=Auth::user()->email;
         $data['updated_at']=$now;

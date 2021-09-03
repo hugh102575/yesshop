@@ -5,7 +5,8 @@
 /* Global settings */
 .ProductCard {
   //margin-top: 50px;
-  background: #CFD2CD;
+  //background: #CFD2CD;
+  background: #f7f7f7;
   padding: 3em;
   line-height: 1.5em;
   border-radius:10px; }
@@ -254,13 +255,9 @@ label {
 @endsection
 
 @section('stage')
-    {{--@if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
-        @if(isset(session()->get('member')->cart))
-            購物車{{session()->get('member')->cart}}
-        @endif
-    @endif--}}
+
 <div class="card shadow">
-<div class="card-body">
+<div class="card-body ">
 <div class="form-group">
 <label class="font-weight-bold">購物車</label>
 </div>
@@ -278,7 +275,7 @@ label {
     <label class="product-line-price">總價</label>
   </div>
 
-  @if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id)
+
         @if(isset(session()->get('member')->cart))
             @php
             $my_cart=json_decode(session()->get('member')->cart);
@@ -380,7 +377,7 @@ label {
             </div>
             @endforeach
         @endif
-    @endif
+
 
   <div class="totals" id="Amount">
     <div class="totals-item">

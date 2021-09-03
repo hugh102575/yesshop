@@ -207,7 +207,7 @@ class GuestShoppingController extends Controller
         $member=session()->get('member');
         $request['Shop_id']=$user->Shop_id;
         $request['Member_id']=$member['id'];
-        $request['order_content'] = json_encode($member['cart']);
+        $request['order_content'] = $member['cart'];
         $result=$this->orderRepo->create($request->all());
         $member['cart']=null;
         if($result){
@@ -217,7 +217,65 @@ class GuestShoppingController extends Controller
             return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all'])->with('error_msg', '訂購失敗！麻煩請再試一次');
         }
     }
+    public function order_update(Request $request,$token,$id){
+        //dd($request->all());
+        $result=false;
+        if(isset($request['order_received_btn'])){
+            $result=$this->orderRepo->order_received($id);
+        }
+        if(isset($request['order_payed_btn'])){
+            $payed_card=$request['payed_card'];
+            $result=$this->orderRepo->order_payed($payed_card,$id);
+        }
+        if($result){
+            if(isset($request['order_received_btn'])){
+                return redirect()->route('shop.order', ['api_token'=>$token])->with('success_msg', '已通知商家收到貨了！');
+            }
+            if(isset($request['order_payed_btn'])){
+                return redirect()->route('shop.order', ['api_token'=>$token])->with('success_msg', '已經通知商家我已付款了！');
+            }
+        }else{
+            return redirect()->route('shop.order', ['api_token'=>$token])->with('error_msg', '訂單狀態更新失敗！');
+        }
+    }
 
+    public function my_order(Request $request,$token){
+        $user=$this->userRepo->token_index($token);
+        $my_id=null;
+        if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id){
+            $my_id=session()->get('member')->id;
+            $my_order=$this->orderRepo->get_my_order($my_id,$user->Shop_id);
+        }else{
+            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all']);
+        }
+        return view('shop.order',['user'=>$user,'my_order'=>$my_order]);
+
+    }
+
+    public function my_info(Request $request,$token){
+        $user=$this->userRepo->token_index($token);
+        if(session()->has('member')&&session()->get('member')->Shop_id==$user->Shop_id){
+        }else{
+            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all']);
+        }
+        return view('shop.info',['user'=>$user]);
+    }
+    public function my_update(Request $request,$token){
+        $user=$this->userRepo->token_index($token);
+        $my_id=session()->get('member')->id;
+        $result=$this->memberRepo->update($request->all(),$my_id);
+        if($result){
+            $member=session()->get('member');
+            $member['name']=$request['member_name'];
+            $member['member_address']=$request['member_address'];
+            $member['member_phone']=$request['member_phone'];
+            $member['member_email']=$request['member_email'];
+            $this->init_session($request,'member',$member);
+            return redirect()->route('shop.my_info', ['api_token'=>$token, 'cate_id'=> 'all'])->with('success_msg', '會員資料已更新！');
+        }else{
+            return redirect()->route('shop.my_info', ['api_token'=>$token, 'cate_id'=> 'all'])->with('error_msg', '會員資料更新失敗！');
+        }
+    }
 
 
     /*public function example($token){

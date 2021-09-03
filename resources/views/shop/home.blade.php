@@ -18,7 +18,7 @@
     font-size: x-large !important;
 }
 .stage_bg{
-    background-color: #f0f0f0;
+    background-color: #f7f7f7;
 }
 form {
    display:inline;
@@ -118,8 +118,11 @@ form {
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">
-                                        會員中心
+                                    <a class="dropdown-item" href="/shop/{{$user->api_token}}/order">
+                                    訂單查詢
+                                    </a>
+                                    <a class="dropdown-item" href="/shop/{{$user->api_token}}/my_info">
+                                    個人資料
                                     </a>
                                     <a class="dropdown-item" href="/shop/{{$user->api_token}}/logout"
                                        onclick="event.preventDefault();

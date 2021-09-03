@@ -28,7 +28,11 @@ class order extends Model
         'order_email',
         'order_memo',
         'order_price',
+        'payed_status',
+        'payed_pending',
+        'payed_card',
         'shipped_status',
+        'received_status',
         'finished_status',
         'created_at',
         'updated_at'

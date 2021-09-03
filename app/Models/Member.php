@@ -24,7 +24,10 @@ class Member extends Model
         'Shop_id',
         'last_login',
         'created_at',
-        'updated_at'
+        'updated_at',
+        'member_address',
+        'member_phone',
+        'member_email'
     ];
 
 

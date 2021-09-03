@@ -26,4 +26,13 @@ class MemberRepository
         $data['last_login']=$now;
         return  Member::create($data);
     }
+    public function update(array $data,$id){
+        $now = date('Y-m-d H:i:s');
+        if(isset($data['member_name'])){
+            $data['name']=$data['member_name'];
+        }
+        $data['updated_at'] = $now;
+        $me = Member::find($id);
+        return  $me ? $me->update($data) : false;
+    }
 }
