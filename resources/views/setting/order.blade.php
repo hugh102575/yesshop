@@ -78,38 +78,38 @@
             <td>
                 @if($order->payed_status=='1' || $order->payed_pending=='1')
                     @if($order->payed_status=='1')
-                    <span class="text-success small">已付款</span>
+                    <span class="text-success small font-weight-bold">已付款</span>
                     @endif
                     @if($order->payed_pending=='1')
-                    <span class="text-info small">等待確認</span>
+                    <span class="text-info small font-weight-bold">等待確認</span>
                     @endif
                 <!--<div class="mb-1">
                 <span class="text-success small">已付款</span>
                 </div>
                 <span class="text-primary small">轉帳後五碼:{{ $order->payed_card }}</span>-->
                 @else
-                <span class="text-danger small">未付款</span>
+                <span class="text-danger small font-weight-bold">未付款</span>
                 @endif
             </td>
             <td>
                 @if($order->shipped_status=='1')
-                <span class="text-success small">已出貨</span>
+                <span class="text-success small font-weight-bold">已出貨</span>
                 @else
-                <span class="text-danger small">未出貨</span>
+                <span class="text-danger small font-weight-bold">未出貨</span>
                 @endif
             </td>
             <td>
                 @if($order->received_status=='1')
-                <span class="text-success small">已收到</span>
+                <span class="text-success small font-weight-bold">已收到</span>
                 @else
-                <span class="text-danger small">未收到</span>
+                <span class="text-danger small font-weight-bold">未收到</span>
                 @endif
             </td>
             <td>
                 @if($order->finished_status=='1')
-                <span class="text-success small">已完成</span>
+                <span class="text-success small font-weight-bold">已完成</span>
                 @else
-                <span class="text-danger small">未完成</span>
+                <span class="text-danger small font-weight-bold">未完成</span>
                 @endif
             </td>
             <td>

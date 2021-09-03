@@ -100,12 +100,52 @@
     </div>
 
     <div class="form-group row">
-      <label for="Product_Img" class="col-sm-4 col-form-label">商品圖片</label>
+      <label for="Product_Img" class="col-sm-4 col-form-label">商品封面</label>
       <div class="col-sm-8">
       <input type="file" name="Product_Img">
       <input class="hidden_object" name="Product_Old_Img" value="{{$merchan->Product_Img}}">
       <img src="{{$merchan->Product_Img}}"  style="max-height: 20rem; max-width: 20rem;">
       <small>{{$merchan->Product_Img}}</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(1)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_1">
+      <input class="hidden_object" name="Product_Old_Img_others_1" value="{{$merchan->Product_Img_others_1}}">
+      <img src="{{$merchan->Product_Img_others_1}}"  style="max-height: 10rem; max-width: 10rem;">
+      <small>{{$merchan->Product_Img_others_1}}</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(2)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_2">
+      <input class="hidden_object" name="Product_Old_Img_others_2" value="{{$merchan->Product_Img_others_2}}">
+      <img src="{{$merchan->Product_Img_others_2}}"  style="max-height: 10rem; max-width: 10rem;">
+      <small>{{$merchan->Product_Img_others_2}}</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(3)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_3">
+      <input class="hidden_object" name="Product_Old_Img_others_3" value="{{$merchan->Product_Img_others_3}}">
+      <img src="{{$merchan->Product_Img_others_3}}"  style="max-height: 10rem; max-width: 10rem;">
+      <small>{{$merchan->Product_Img_others_3}}</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(4)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_4">
+      <input class="hidden_object" name="Product_Old_Img_others_4" value="{{$merchan->Product_Img_others_4}}">
+      <img src="{{$merchan->Product_Img_others_4}}"  style="max-height: 10rem; max-width: 10rem;">
+      <small>{{$merchan->Product_Img_others_4}}</small>
       </div>
     </div>
 

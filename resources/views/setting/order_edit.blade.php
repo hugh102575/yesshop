@@ -304,7 +304,7 @@ label {
                     @endif
                     @if($order->payed_pending=='1')
                     <span style="display:inline;">
-                    <span class="mx-3 text-danger">請點收款項，轉帳後五碼
+                    <span class="mx-3 text-danger font-weight-bold">請點收款項，轉帳後五碼
                     {{$order->payed_card}}</span>
                     <select class="form-select form-control" name="select_payed_status" aria-label="Default select example">
                         <option  value="1">已付款</option>
@@ -391,8 +391,7 @@ label {
                 </select>
             </span>
         </li>
-
-        <button class="btn btn-primary form-control">更新訂單</button>
+        <button class=" btn btn-primary form-control">更新訂單</button>
 
         <ul class="list-group list-group-flush   container-fluid  mt-3 p-5">
 

@@ -17,7 +17,12 @@ class MerchandiseRepository
         $data['Shop_id']=$shop;
         $data['create_from']=Auth::user()->email;
         $data['created_at']=$now;
+
         $data['Product_Img']=$this->store_image(request(),'merchandise','Product_Img','Product_Old_Img');
+        $data['Product_Img_others_1']=$this->store_image(request(),'merchandise','Product_Img_others_1','Product_Old_Img_others_1');
+        $data['Product_Img_others_2']=$this->store_image(request(),'merchandise','Product_Img_others_2','Product_Old_Img_others_2');
+        $data['Product_Img_others_3']=$this->store_image(request(),'merchandise','Product_Img_others_3','Product_Old_Img_others_3');
+        $data['Product_Img_others_4']=$this->store_image(request(),'merchandise','Product_Img_others_4','Product_Old_Img_others_4');
         if(isset($data['highlight'])){
             $data['highlight']="1";
         }else{
@@ -31,6 +36,10 @@ class MerchandiseRepository
         $data['update_from']=Auth::user()->email;
         $data['updated_at']=$now;
         $data['Product_Img']=$this->store_image(request(),'merchandise','Product_Img','Product_Old_Img');
+        $data['Product_Img_others_1']=$this->store_image(request(),'merchandise','Product_Img_others_1','Product_Old_Img_others_1');
+        $data['Product_Img_others_2']=$this->store_image(request(),'merchandise','Product_Img_others_2','Product_Old_Img_others_2');
+        $data['Product_Img_others_3']=$this->store_image(request(),'merchandise','Product_Img_others_3','Product_Old_Img_others_3');
+        $data['Product_Img_others_4']=$this->store_image(request(),'merchandise','Product_Img_others_4','Product_Old_Img_others_4');
         if(isset($data['highlight'])){
             $data['highlight']="1";
         }else{
@@ -53,7 +62,7 @@ class MerchandiseRepository
             $file = $request->file($new_img);
             if ($file->isValid()){
                 $extension = $file->getClientOriginalExtension();
-                $path = 'Shop_Img/' . Auth::user()->Shop_id. '/' . $dir.'/' . uniqid('', true) . '.' . $extension;
+                $path = 'Shop_Img/' . Auth::user()->Shop_id. '/' . $dir . '/' . uniqid('', true) . '.' . $extension;
                 Storage::disk('public')->put($path, $request->file($new_img)->get());
                 if (Storage::disk('public')->exists($path)){
                     $image_path = '/storage'.'/'.$path;

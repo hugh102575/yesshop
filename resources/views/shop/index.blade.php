@@ -28,12 +28,12 @@ foreach($user->shop->merchandise as $mmmm){
         $highlight_count++;
     }
 }
-
 @endphp
+
 @section('carousel')
 @if($highlight_count!=0)
-<div class="viewed pt-5 px-5">
-    <div class="container-fluid">
+<div class="viewed pt-5 px-5 ">
+    <div class="container-fluid col-sm-10">
         <div class="row">
             <div class="col">
                 <div class="bbb_viewed_title_container">
@@ -163,7 +163,7 @@ foreach($user->shop->merchandise as $mmmm){
 
 <div class="card shadow">
             <div class="card-body">
-                <div class="form-group">
+                <div class="form-group ">
                     <label class="font-weight-bold">商品</label>
                 </div>
                 <div class="form-group"><hr></div>

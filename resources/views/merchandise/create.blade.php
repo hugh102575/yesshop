@@ -88,9 +88,37 @@
 
 
     <div class="form-group row">
-      <label for="Product_Img" class="col-sm-4 col-form-label">商品圖片</label>
+      <label for="Product_Img" class="col-sm-4 col-form-label">商品封面</label>
       <div class="col-sm-8">
       <input type="file" name="Product_Img">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(1)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_1">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(2)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_2">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(3)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_3">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="Product_Img" class="col-sm-4 col-form-label">更多圖片(4)</label>
+      <div class="col-sm-8">
+      <input type="file" name="Product_Img_others_4">
       </div>
     </div>
 

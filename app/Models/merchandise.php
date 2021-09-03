@@ -26,6 +26,10 @@ class merchandise extends Model
         'Product_Model',
         'Product_Describe',
         'Product_Img',
+        'Product_Img_others_1',
+        'Product_Img_others_2',
+        'Product_Img_others_3',
+        'Product_Img_others_4',
         'highlight',
         //'Product_forSale',
 

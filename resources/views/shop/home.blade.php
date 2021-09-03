@@ -51,7 +51,7 @@ form {
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
 
   <a class="navbar-brand ml-3 text-light" href="/shop/{{$user->api_token}}/index/all">
-  <i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;{{$user->shop->Shop_Name}}
+  <i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="font-weight-bold">{{$user->shop->Shop_Name}}</span>
 
 
     </a>
