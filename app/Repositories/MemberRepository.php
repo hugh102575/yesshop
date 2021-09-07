@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Hash;
 
 class MemberRepository
 {
+    public function find($id){
+        return  Member::find($id);
+    }
     public function login(array $data){
         $now = date('Y-m-d H:i:s');
         $result=false;
@@ -35,4 +38,12 @@ class MemberRepository
         $me = Member::find($id);
         return  $me ? $me->update($data) : false;
     }
+    public function save_unfinished_cart($unfinished_cart,$unfinished_id){
+        $now = date('Y-m-d H:i:s');
+        $data['updated_at'] = $now;
+        $data['unfinished_cart'] = $unfinished_cart;
+        $me = Member::find($unfinished_id);
+        return  $me ? $me->update($data) : false;
+    }
+
 }

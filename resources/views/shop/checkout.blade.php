@@ -262,113 +262,114 @@ label {
         <div class="form-group"><hr>
         <div class="card shadow">
 <div class="card-body">
-</div>
 
 
-<div class="ProductCard">
-<div class="shopping-cart mt-0">
-  <div class="column-labels">
-    <label class="product-image">Image</label>
-    <label class="product-details">Product</label>
-    <label class="product-price">價格</label>
-    <label class="product-quantity">數量</label>
-    <label class="product-line-price">總價</label>
-  </div>
 
-        @if(isset(session()->get('member')->cart))
-            @php
-            $my_cart=json_decode(session()->get('member')->cart);
-            @endphp
+        <div class="ProductCard">
+        <div class="shopping-cart mt-0">
+        <div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-price">價格</label>
+            <label class="product-quantity">數量</label>
+            <label class="product-line-price">總價</label>
+        </div>
+
+                @if(isset(session()->get('member')->cart))
+                    @php
+                    $my_cart=json_decode(session()->get('member')->cart);
+                    @endphp
 
 
-            @foreach($my_cart as $ShopCart)
-            @php
-            $chart_index=$loop->index;
-            @endphp
-            <div class="product">
+                    @foreach($my_cart as $ShopCart)
+                    @php
+                    $chart_index=$loop->index;
+                    @endphp
+                    <div class="product">
 
-                <div class="product-image">
-                     @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$ShopCart->buy_id)
+                        <div class="product-image">
+                            @foreach($user->shop->merchandise as $Product)
+                                @if($Product->id==$ShopCart->buy_id)
 
-                            <a href="/shop/{{$user->api_token}}/{{$Product->id}}/product">
-                            <img src="{{$Product->Product_Img}}">
-                            </a>
-                        @endif
-                    @endforeach
+                                    <a href="/shop/{{$user->api_token}}/{{$Product->id}}/product">
+                                    <img src="{{$Product->Product_Img}}">
+                                    </a>
+                                @endif
+                            @endforeach
 
-                </div>
-                <div class="product-details">
-                <div class="product-title"><!--商品的名稱-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$ShopCart->buy_id)
-                            <span class="">{{$Product->Product_Name}}</span>
-                        @endif
-                    @endforeach
-                </div>
-                <p class="product-description"><!--商品的描述-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$ShopCart->buy_id)
-                            @if(isset($Product->Product_Model))
-                                @php
-                                $product_model=json_decode($Product->Product_Model);
-                                @endphp
-                                <small class="">
-                                @foreach($product_model as $mm)
-                                    @if($loop->index==$ShopCart->buy_model)
-                                    <span class="text-danger">型號:{{$mm->value}}</span>
+                        </div>
+                        <div class="product-details">
+                        <div class="product-title"><!--商品的名稱-->
+                            @foreach($user->shop->merchandise as $Product)
+                                @if($Product->id==$ShopCart->buy_id)
+                                    <span class="">{{$Product->Product_Name}}</span>
+                                @endif
+                            @endforeach
+                        </div>
+                        <p class="product-description"><!--商品的描述-->
+                            @foreach($user->shop->merchandise as $Product)
+                                @if($Product->id==$ShopCart->buy_id)
+                                    @if(isset($Product->Product_Model))
+                                        @php
+                                        $product_model=json_decode($Product->Product_Model);
+                                        @endphp
+                                        <small class="">
+                                        @foreach($product_model as $mm)
+                                            @if($loop->index==$ShopCart->buy_model)
+                                            <span class="text-danger">型號:{{$mm->value}}</span>
+                                            @endif
+
+                                            {{--@if($loop->index==$ShopCart->buy_model)
+                                            <small class="">
+                                                <span class="text-danger">備註:</span>
+                                                {{$mm->value}}
+                                            </small>
+                                            @endif--}}
+                                        @endforeach
+                                        </small>
                                     @endif
 
-                                    {{--@if($loop->index==$ShopCart->buy_model)
-                                    <small class="">
-                                        <span class="text-danger">備註:</span>
-                                        {{$mm->value}}
-                                    </small>
-                                    @endif--}}
-                                @endforeach
-                                </small>
-                            @endif
+                                    <!--商品的型號-->
+                                @endif
+                            @endforeach
+                        </p>
+                        </div>
 
-                            <!--商品的型號-->
-                        @endif
+                        @foreach($user->shop->merchandise as $Product)
+                                @if($Product->id==$ShopCart->buy_id)
+                                <input class="hidden_object" id="per_price_{{$chart_index}}_{{$ShopCart->buy_id}}" value="{{$Product->Product_Price}}" >
+                                @endif
+                        @endforeach
+
+                        <div class="product-price"><!--商品的價格-->
+                            @foreach($user->shop->merchandise as $Product)
+                                @if($Product->id==$ShopCart->buy_id)
+                                    {{$Product->Product_Price}}
+                                @endif
+                            @endforeach
+                        </div>
+                        <div class="product-quantity">
+                        <!--value==目前要購買的商品數量-->
+                            <label id="update_cart_number_{{$chart_index}}_{{$ShopCart->buy_id}}" class="update_cart_number">
+                                {{$ShopCart->buy_quantity}}
+                            </label>
+                        </div>
+                        <div class="product-line-price">
+                        <!--商品總價(單價*數量)(會隨著按鈕自動調整)-->
+                            @foreach($user->shop->merchandise as $Product)
+                                @if($Product->id==$ShopCart->buy_id)
+                                    {{$Product->Product_Price*$ShopCart->buy_quantity}}
+                                @endif
+                            @endforeach
+                        </div>
+                    </div>
                     @endforeach
-                </p>
-                </div>
-
-                @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$ShopCart->buy_id)
-                        <input class="hidden_object" id="per_price_{{$chart_index}}_{{$ShopCart->buy_id}}" value="{{$Product->Product_Price}}" >
-                        @endif
-                @endforeach
-
-                <div class="product-price"><!--商品的價格-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$ShopCart->buy_id)
-                            {{$Product->Product_Price}}
-                        @endif
-                    @endforeach
-                </div>
-                <div class="product-quantity">
-                <!--value==目前要購買的商品數量-->
-                    <label id="update_cart_number_{{$chart_index}}_{{$ShopCart->buy_id}}" class="update_cart_number">
-                        {{$ShopCart->buy_quantity}}
-                    </label>
-                </div>
-                <div class="product-line-price">
-                <!--商品總價(單價*數量)(會隨著按鈕自動調整)-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$ShopCart->buy_id)
-                            {{$Product->Product_Price*$ShopCart->buy_quantity}}
-                        @endif
-                    @endforeach
-                </div>
-            </div>
-            @endforeach
-        @endif
+                @endif
 
 
-</div>
-</div>
+        </div>
+        </div>
+    </div>
     </div>
     </div>
     <!--Section: Block Content-->

@@ -50,6 +50,10 @@ class GuestShoppingController extends Controller
         return view('shop.login',['user'=>$user,'error_type'=>null]);
     }
     public function logout($token){
+        $member=session()->get('member');
+        $unfinished_id=$member['id'];
+        $unfinished_cart = $member['cart'];
+        $result=$this->memberRepo->save_unfinished_cart($unfinished_cart,$unfinished_id);
         $this->forget_session(request(),'member');
         return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all'])->with('success_msg', '您已登出！');;
     }
@@ -97,10 +101,16 @@ class GuestShoppingController extends Controller
         //dd($request->all());
         $user=$this->userRepo->token_index($token);
 
-        $result=$this->memberRepo->login($request->all());
-        if($result){
-            $this->init_session($request,'member',$result);
-            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all'])->with('success_msg', ' 歡迎光臨！'.$result->name);
+        $member=$this->memberRepo->login($request->all());
+        if($member){
+            $me=$this->memberRepo->find($member['id']);
+            if(isset($me['unfinished_cart'])){
+                $member['cart']=$me['unfinished_cart'];
+            }else{
+                $member['cart']=null;
+            }
+            $this->init_session($request,'member',$member);
+            return redirect()->route('shop.index', ['api_token'=>$token, 'cate_id'=> 'all'])->with('success_msg', ' 歡迎光臨！'.$member->name);
         }else{
             return redirect()->route('shop.login_form', ['api_token'=>$token, 'error_type'=> 'login_failed'])
                 ->with('error_msg','登入失敗！帳號或密碼錯誤')

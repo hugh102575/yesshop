@@ -260,98 +260,35 @@ label {
 </div>
 <div class="form-group"><hr></div>
     @php
+    $my_order_count=count(json_decode($my_order));
     $my_order=array_reverse(json_decode($my_order));
+    $collapse_count=1;
     @endphp
+    @if($my_order_count==0)
+    您目前尚未訂購，沒有訂單喔！
+    @endif
     @foreach($my_order as $order)
+
+    <!--<div class="ProductCard card shadow mb-5 " id="collapseExample_{{$collapse_count}}">-->
     <div class="ProductCard card shadow mb-5">
     <div class="shopping-cart mt-0">
 
-    <div class="column-labels">
 
     @php
     $datetime=$order->created_at;
     $newDate = date("Y-m-d", strtotime($datetime));
+
     @endphp
-    <label class="row">日期: {{$newDate}}</label>
-        <label class="product-image">Image</label>
-        <label class="product-details">Product</label>
-        <label class="product-price">價格</label>
-        <label class="product-quantity">數量</label>
-        <label class="product-line-price">總價</label>
-    </div>
+
+
+
         @php
         $order_content=$order->order_content;
         $order_content_decode=json_decode($order->order_content);
 
         @endphp
         {{--{{$order_content}}--}}
-        @foreach($order_content_decode as $oc)
-        {{--{{$oc->buy_id}}--}}
-        <div class="product">
-            <div class="product-image">
-                @foreach($user->shop->merchandise as $Product)
-                    @if($Product->id==$oc->buy_id)
-
-                        <a href="/shop/{{$user->api_token}}/{{$Product->id}}/product">
-                        <img src="{{$Product->Product_Img}}">
-                        </a>
-                    @endif
-                @endforeach
-
-            </div>
-
-            <div class="product-details">
-                <div class="product-title"><!--商品的名稱-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$oc->buy_id)
-                            <span class="">{{$Product->Product_Name}}</span>
-                        @endif
-                    @endforeach
-                </div>
-                <p class="product-description"><!--商品的描述-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$oc->buy_id)
-                            @if(isset($Product->Product_Model))
-                                @php
-                                $product_model=json_decode($Product->Product_Model);
-                                @endphp
-                                <small class="">
-                                @foreach($product_model as $mm)
-                                    @if($loop->index==$oc->buy_model)
-                                    <span class="text-danger">型號:{{$mm->value}}</span>
-                                    @endif
-                                @endforeach
-                                </small>
-                            @endif
-                        @endif
-                    @endforeach
-                </p>
-                </div>
-
-                <div class="product-price"><!--商品的價格-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$oc->buy_id)
-                            {{$Product->Product_Price}}
-                        @endif
-                    @endforeach
-                </div>
-                <div class="product-quantity">
-                <!--value==目前要購買的商品數量-->
-                    <label  class="update_cart_number">
-                        {{$oc->buy_quantity}}
-                    </label>
-                </div>
-                <div class="product-line-price">
-                <!--商品總價(單價*數量)(會隨著按鈕自動調整)-->
-                    @foreach($user->shop->merchandise as $Product)
-                        @if($Product->id==$oc->buy_id)
-                            {{$Product->Product_Price*$oc->buy_quantity}}
-                        @endif
-                    @endforeach
-                </div>
-
-        </div>
-        @endforeach
+        <label class="font-weight-bold  pb-3 mx-auto">日期: {{$newDate}}</label>
         <li class="list-group-item d-flex justify-content-between  align-items-center">
             <span class="mr-3" style="display:inline;">總價格:</span>
             <h4 style="display:inline;" class="totals-value text-danger" id="cart-subtotal">{{$order->order_price}}</h4>
@@ -426,6 +363,87 @@ label {
                 @endif
             </span>
         </li>
+
+        <button id="collapse_btn_{{$collapse_count}}" class="row mx-auto my-3" data-toggle="collapse" href="#collapseExample_{{$collapse_count}}" role="button" aria-expanded="false" aria-controls="collapseExample">展開內容</button>
+
+    <div class="collapse" id="collapseExample_{{$collapse_count}}">
+        <div class="column-labels">
+            {{--<label class="row">日期: {{$newDate}}</label>--}}
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-price">價格</label>
+            <label class="product-quantity">數量</label>
+            <label class="product-line-price">總價</label>
+        </div>
+        @foreach($order_content_decode as $oc)
+        {{--{{$oc->buy_id}}--}}
+        <div class="product">
+            <div class="product-image">
+                @foreach($user->shop->merchandise as $Product)
+                    @if($Product->id==$oc->buy_id)
+
+                        <a href="/shop/{{$user->api_token}}/{{$Product->id}}/product">
+                        <img src="{{$Product->Product_Img}}">
+                        </a>
+                    @endif
+                @endforeach
+
+            </div>
+
+            <div class="product-details">
+                <div class="product-title"><!--商品的名稱-->
+                    @foreach($user->shop->merchandise as $Product)
+                        @if($Product->id==$oc->buy_id)
+                            <span class="">{{$Product->Product_Name}}</span>
+                        @endif
+                    @endforeach
+                </div>
+                <p class="product-description"><!--商品的描述-->
+                    @foreach($user->shop->merchandise as $Product)
+                        @if($Product->id==$oc->buy_id)
+                            @if(isset($Product->Product_Model))
+                                @php
+                                $product_model=json_decode($Product->Product_Model);
+                                @endphp
+                                <small class="">
+                                @foreach($product_model as $mm)
+                                    @if($loop->index==$oc->buy_model)
+                                    <span class="text-danger">型號:{{$mm->value}}</span>
+                                    @endif
+                                @endforeach
+                                </small>
+                            @endif
+                        @endif
+                    @endforeach
+                </p>
+                </div>
+
+                <div class="product-price"><!--商品的價格-->
+                    @foreach($user->shop->merchandise as $Product)
+                        @if($Product->id==$oc->buy_id)
+                            {{$Product->Product_Price}}
+                        @endif
+                    @endforeach
+                </div>
+                <div class="product-quantity">
+                <!--value==目前要購買的商品數量-->
+                    <label  class="update_cart_number">
+                        {{$oc->buy_quantity}}
+                    </label>
+                </div>
+                <div class="product-line-price">
+                <!--商品總價(單價*數量)(會隨著按鈕自動調整)-->
+                    @foreach($user->shop->merchandise as $Product)
+                        @if($Product->id==$oc->buy_id)
+                            {{$Product->Product_Price*$oc->buy_quantity}}
+                        @endif
+                    @endforeach
+                </div>
+
+        </div>
+        @endforeach
+
+
 
         {{--<li class="list-group-item d-flex justify-content-between  align-items-center ">
 
@@ -544,10 +562,14 @@ label {
 
             </ul>
 
-
     </div>
     </div>
+    </div>
+    @php
+    $collapse_count++;
+    @endphp
     @endforeach
+
 </div>
 </div>
 @endsection
@@ -579,5 +601,18 @@ function validate_completed(form){
         return false;
     }
 }
+
+
+$(".collapse").on('show.bs.collapse', function(e) {
+    //alert(this.id)
+    var collapse_id=(this.id).replace("collapseExample_", "");
+    document.getElementById('collapse_btn_'+collapse_id).innerHTML='收合內容';
+});
+$(".collapse").on('hidden.bs.collapse', function(e) {
+    //alert(this.id)
+    var collapse_id=(this.id).replace("collapseExample_", "");
+    document.getElementById('collapse_btn_'+collapse_id).innerHTML='展開內容';
+});
+
 </script>
 @endsection

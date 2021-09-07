@@ -4,7 +4,9 @@
 @section('css')
 <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet">
 <style>
-
+.enlarge_text_btn{
+    font-size: x-large !important;
+}
 </style>
 @endsection
 
@@ -34,6 +36,9 @@
 
     <h5 class="font-weight-bold text-success mr-5">訂單管理</h5>
 
+    <button class="btn btn-link show_btns shadow-none" type="button" id="show_unfinished_btn"><small>顯示未完成</small></button>
+    <button class="btn btn-link show_btns shadow-none" type="button" id="show_finished_btn"><small>顯示已完成</small></button>
+    <button class="btn btn-link show_btns shadow-none" type="button" id="show_all_btn"><small>顯示全部</small></button>
   </div>
   <div class="card-body">
     <div class="table-responsive">
@@ -129,6 +134,7 @@
 @endsection
 
 @section('js')
+
 <!-- Page level plugins -->
 <script src="{{asset('vendor/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{asset('vendor/datatables/dataTables.bootstrap4.min.js')}}"></script>
@@ -141,6 +147,120 @@ window.addEventListener('load', function () {
     document.getElementById('nav_title').innerHTML="訂單管理";
 });
 
+$(document).ready( function() {
+  $('#dataTable').dataTable( {
+        pageLength: 10,
+        order: [],
+        responsive: true,
+        oLanguage: {
+            "sProcessing": "處理中...",
+            "sLengthMenu": "顯示 _MENU_ 項結果",
+            "sZeroRecords": "沒有匹配結果",
+            "sInfo": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered": "(從 _MAX_ 項結果過濾)",
+            "sSearch": "搜尋:",
+            "oPaginate": {
+                "sFirst": "首頁",
+                "sPrevious": "上頁",
+                "sNext": "下頁",
+                "sLast": "尾頁"
+            }
+        },
+        destroy:true,
+        "oSearch": {"sSearch": "未完成"}
+    } );
+
+    document.getElementById('show_unfinished_btn').classList.add('enlarge_text_btn');
+} )
+
+var show_unfinished_btn=document.getElementById('show_unfinished_btn');
+show_unfinished_btn.addEventListener("click", function() {
+    $('#dataTable').dataTable( {
+        pageLength: 10,
+        order: [],
+        responsive: true,
+        oLanguage: {
+            "sProcessing": "處理中...",
+            "sLengthMenu": "顯示 _MENU_ 項結果",
+            "sZeroRecords": "沒有匹配結果",
+            "sInfo": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered": "(從 _MAX_ 項結果過濾)",
+            "sSearch": "搜尋:",
+            "oPaginate": {
+                "sFirst": "首頁",
+                "sPrevious": "上頁",
+                "sNext": "下頁",
+                "sLast": "尾頁"
+            }
+        },
+        destroy:true,
+        "oSearch": {"sSearch": "未完成"}
+    } );
+});
+var show_finished_btn=document.getElementById('show_finished_btn');
+show_finished_btn.addEventListener("click", function() {
+    $('#dataTable').dataTable( {
+        pageLength: 10,
+        order: [],
+        responsive: true,
+        oLanguage: {
+            "sProcessing": "處理中...",
+            "sLengthMenu": "顯示 _MENU_ 項結果",
+            "sZeroRecords": "沒有匹配結果",
+            "sInfo": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered": "(從 _MAX_ 項結果過濾)",
+            "sSearch": "搜尋:",
+            "oPaginate": {
+                "sFirst": "首頁",
+                "sPrevious": "上頁",
+                "sNext": "下頁",
+                "sLast": "尾頁"
+            }
+        },
+        destroy:true,
+        "oSearch": {"sSearch": "已完成"}
+    } );
+});
+var show_all_btn=document.getElementById('show_all_btn');
+show_all_btn.addEventListener("click", function() {
+    $('#dataTable').dataTable( {
+        pageLength: 10,
+        order: [],
+        responsive: true,
+        oLanguage: {
+            "sProcessing": "處理中...",
+            "sLengthMenu": "顯示 _MENU_ 項結果",
+            "sZeroRecords": "沒有匹配結果",
+            "sInfo": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "sInfoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "sInfoFiltered": "(從 _MAX_ 項結果過濾)",
+            "sSearch": "搜尋:",
+            "oPaginate": {
+                "sFirst": "首頁",
+                "sPrevious": "上頁",
+                "sNext": "下頁",
+                "sLast": "尾頁"
+            }
+        },
+        destroy:true,
+        "oSearch": {"sSearch": ""}
+    } );
+});
+
+var show_btns=document.querySelectorAll(".show_btns")
+show_btns.forEach(function(item,index){
+        var btn=document.getElementById(item.id);
+        btn.addEventListener("click", function() {
+            show_btns.forEach(function(item,index){
+                var btn_other=document.getElementById(item.id);
+                btn_other.classList.remove('enlarge_text_btn');
+            });
+            btn.classList.add('enlarge_text_btn');
+        });
+    });
 </script>
 @endsection
 

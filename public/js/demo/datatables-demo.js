@@ -22,8 +22,10 @@ $(document).ready(function(){
           "sNext": "下頁",
           "sLast": "尾頁"
       }
-  }
+  },
+  destroy:true
 
 });
+
 
 });

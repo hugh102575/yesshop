@@ -27,7 +27,8 @@ class Member extends Model
         'updated_at',
         'member_address',
         'member_phone',
-        'member_email'
+        'member_email',
+        'unfinished_cart'
     ];
 
 
