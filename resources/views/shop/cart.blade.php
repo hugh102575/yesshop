@@ -374,13 +374,21 @@ label {
                         @endif
                     @endforeach
                 </div>
+                
             </div>
             @endforeach
+            @if($user->shop->ship_tax!=null)
+            <div class="mx-auto mb-5">
+              <span class="text-danger">運費</span> $ {{$user->shop->ship_tax}}
+            </div>
+            @endif
         @endif
+
+        
 
 
   <div class="totals" id="Amount">
-    <div class="totals-item">
+    <div id="totals-item" class="totals-item">
       <label style="font-weight: bold;">總金額:</label>
       <h3 style="display:inline;" class="totals-value text-danger" id="cart-subtotal">0</h3>
     </div>
@@ -395,7 +403,14 @@ label {
 
 @section('js')
 <script>
+var device=what_device();
+if(device=='mobile'){
+  document.getElementById('totals-item').classList.remove('totals-item');
+}
 var user={!! json_encode($user) !!};
+var shop={!! json_encode($user->shop) !!};
+var ship_tax=shop.ship_tax;
+
 $(document).ready(function() {
 
  /* Set rates + misc */
@@ -419,27 +434,35 @@ $(document).ready(function() {
  /* Recalculate cart */
  function recalculateCart()
  {
-   var subtotal = 0;
-
+    var subtotal = 0;
    /* Sum up row totals */
    $('.product').each(function () {
      subtotal += parseInt($(this).children('.product-line-price').text());
    });
-
+   var shipping=0;
+   if(ship_tax!=null){
+     shipping = ship_tax;
+   }
+   var total=subtotal+shipping;
    /* Calculate totals */
-   var tax = subtotal * taxRate;
-   var shipping = (subtotal > 0 ? shippingRate : 0);
-   var total = subtotal + tax + shipping;
+   //var tax = subtotal * taxRate;
+   //var shipping = (subtotal > 0 ? shippingRate : 0);
+   //var total = subtotal + tax + shipping;
 
    /* Update totals display */
    $('.totals-value').fadeOut(fadeTime, function() {
-     $('#cart-subtotal').html(subtotal);
+     if(subtotal==0){
+      $('#cart-subtotal').html(0);
+     }else{
+      $('#cart-subtotal').html(total);
+     }
+     
     /*
      $('#cart-tax').html(tax.toFixed(2));
      $('#cart-shipping').html(shipping.toFixed(2));
      $('#cart-total').html(total.toFixed(2));
     */
-     if(total == 0){
+     if(subtotal == 0){
        $('.checkout').fadeOut(fadeTime);
      }else{
        $('.checkout').fadeIn(fadeTime);

@@ -33,7 +33,8 @@ class shop extends Model
         'bank_name',
         'bank_port',
         'card_number',
-        'ship_tax'
+        'ship_tax',
+        'display_rows'
     ];
 
     public function merchandise(){

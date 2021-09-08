@@ -52,6 +52,18 @@ class MerchandiseRepository
     public function delete($id){
         $merchan=merchandise::find($id);
         $this->delete_old_img($merchan->Product_Img);
+        if(isset($merchan->Product_Img_others_1)){
+            $this->delete_old_img($merchan->Product_Img_others_1);
+        }
+        if(isset($merchan->Product_Img_others_2)){
+            $this->delete_old_img($merchan->Product_Img_others_2);
+        }
+        if(isset($merchan->Product_Img_others_3)){
+            $this->delete_old_img($merchan->Product_Img_others_3);
+        }
+        if(isset($merchan->Product_Img_others_4)){
+            $this->delete_old_img($merchan->Product_Img_others_4);
+        }
         $d_result= merchandise::destroy($id);
         return $d_result;
     }

@@ -61,7 +61,8 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary float-left mt-3">
-                                        {{ __('Login') }}
+                                        {{--{{ __('Login') }}--}}
+                                         登入
                                     </button>
 
                                     {{--@if (Route::has('password.request'))
@@ -136,7 +137,8 @@
                                 <div class="form-group row mb-0">
                                     <div class="col-md-6 offset-md-4">
                                         <button type="submit" class="btn btn-primary float-left mt-3">
-                                            {{ __('Register') }}
+                                            {{--{{ __('Register') }}--}}
+                                            註冊
                                         </button>
                                     </div>
                                 </div>

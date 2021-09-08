@@ -531,14 +531,14 @@ var model=JSON.parse(product.Product_Model);
 window.addEventListener('load', function () {
     if(model!=null){
         var model_div = document.createElement('div');
-        model_div.setAttribute("class","mb-5");
+        model_div.setAttribute("class","mb-5 row");
         document.getElementById('product_category_div').appendChild(model_div);
             model.forEach(function(item,index){
                 console.log('item',item.value)
                 var div = document.createElement('div');
-                div.setAttribute("class","form-check form-check-inline mx-3");
+                div.setAttribute("class","form-check form-check-inline mx-3 mb-1");
                 var input= document.createElement('input');
-                input.setAttribute("class","form-check-input ");
+                input.setAttribute("class","form-check-input");
                 input.setAttribute("type","checkbox");
                 input.setAttribute("name","product_model");
                 input.setAttribute("id","inlineCheckbox_"+(index+1));
@@ -546,7 +546,7 @@ window.addEventListener('load', function () {
                 var label= document.createElement('label');
                 label.setAttribute("class","form-check-label h5 text-primary");
                 label.setAttribute("for","inlineCheckbox_"+(index+1));
-                label.innerHTML=item.value;
+                label.innerHTML='<small>'+item.value+'</small>';
                 div.appendChild(input);
                 div.appendChild(label);
                 model_div.appendChild(div);

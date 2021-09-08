@@ -102,7 +102,7 @@
             </div>
             </div>
 
-            <!--<div class="card py-4 px-5 mb-3">
+            <div class="card py-4 px-5 mb-3">
             <div class="form-group row">
             <label for="ship_tax" class="col-sm-4 col-form-label">商品運費 (元)</label>
                 <div class="col-sm-8" >
@@ -110,7 +110,7 @@
                     <small class="col-sm-4 text-secondary">客戶的訂單會加上此運費</small>
                 </div>
             </div>
-            </div>-->
+            </div>
         </div>
         </div>
 

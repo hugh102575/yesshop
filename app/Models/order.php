@@ -27,6 +27,7 @@ class order extends Model
         'order_phone',
         'order_email',
         'order_memo',
+        'order_shipping',
         'order_price',
         'payed_status',
         'payed_pending',

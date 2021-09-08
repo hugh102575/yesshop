@@ -272,6 +272,11 @@ label {
 
         </div>
         @endforeach
+        @if($order->order_shipping!=null)
+        <div class="mx-auto mb-5 text-center">
+          <span class="text-danger">運費</span> $ {{$order->order_shipping}}
+        </div>
+        @endif
         <li class="list-group-item d-flex justify-content-between  align-items-center">
             <span class="mr-3" style="display:inline;">總價格:</span>
             <h4 style="display:inline;" class="totals-value text-danger" id="cart-subtotal">{{$order->order_price}}</h4>

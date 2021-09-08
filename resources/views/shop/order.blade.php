@@ -421,7 +421,8 @@ label {
                 <div class="product-price"><!--商品的價格-->
                     @foreach($user->shop->merchandise as $Product)
                         @if($Product->id==$oc->buy_id)
-                            {{$Product->Product_Price}}
+                            {{--{{$Product->Product_Price}}--}}
+                            {{$oc->buy_price/$oc->buy_quantity}}
                         @endif
                     @endforeach
                 </div>
@@ -435,13 +436,18 @@ label {
                 <!--商品總價(單價*數量)(會隨著按鈕自動調整)-->
                     @foreach($user->shop->merchandise as $Product)
                         @if($Product->id==$oc->buy_id)
-                            {{$Product->Product_Price*$oc->buy_quantity}}
+                            {{$oc->buy_price}}
                         @endif
                     @endforeach
                 </div>
 
         </div>
         @endforeach
+        @if($order->order_shipping!=null)
+        <div class="mx-auto mb-3">
+          <span class="text-danger">運費</span> $ {{$order->order_shipping}}
+        </div>
+        @endif
 
 
 

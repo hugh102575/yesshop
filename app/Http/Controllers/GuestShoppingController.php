@@ -218,6 +218,9 @@ class GuestShoppingController extends Controller
         $request['Shop_id']=$user->Shop_id;
         $request['Member_id']=$member['id'];
         $request['order_content'] = $member['cart'];
+        if(isset($user->shop->ship_tax)){
+            $request['order_shipping'] = $user->shop->ship_tax;
+        }
         $result=$this->orderRepo->create($request->all());
         $member['cart']=null;
         if($result){

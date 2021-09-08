@@ -51,7 +51,7 @@ form {
 <nav class="navbar navbar-expand-lg navbar-light bg-dark">
 
   <a class="navbar-brand ml-3 text-light" href="/shop/{{$user->api_token}}/index/all">
-  <i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;<span class="font-weight-bold">{{$user->shop->Shop_Name}}</span>
+  {{--<i class="fas fa-home"></i>&nbsp;&nbsp;&nbsp;&nbsp;--}}<span class="font-weight-bold">{{$user->shop->Shop_Name}}</span>
 
 
     </a>
@@ -150,7 +150,7 @@ form {
 
 @yield('carousel')
 
-<div class="container-fluid py-4 px-5">
+<div id="home_container" class="container-fluid py-4 px-5">
 
 
 
@@ -261,6 +261,18 @@ document.getElementById('search')
   searchStyle.innerHTML = ".searchtable:not([data-index*=\"" + this.value.toLowerCase() + "\"]) { display: none; }";
   // beware of css injections!
 });
+
+function what_device(){
+    if (typeof window.orientation !== 'undefined') {
+        return 'mobile';
+    }else{
+        return 'pc';
+    }
+}
+var device=what_device();
+if(device=='mobile'){
+  document.getElementById('home_container').classList.remove('px-5');
+}
 </script>
     @yield('js')
 @endsection

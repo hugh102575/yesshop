@@ -3,6 +3,14 @@
 
 @section('css')
 <link href="{{asset('css/carousel.css')}}" rel="stylesheet">
+@php
+$display_rows=$user->shop->display_rows;
+if($display_rows==null){
+    $display_rows=5;
+}
+$display_percent=100/$display_rows;
+//$display_percent=50;
+@endphp
 <style>
 .serv ul {
   display: flex;
@@ -12,7 +20,7 @@
 
 .serv ul li {
   list-style: none;
-  //flex: 0 0 30.333%;
+  flex: 0 0 {!!$display_percent!!}%;
 }
 
 .shop_card:hover{
@@ -49,10 +57,14 @@ foreach($user->shop->merchandise as $mmmm){
                 </div>
                 <div class="bbb_viewed_slider_container py-3 ">
                     <div class="owl-carousel owl-theme bbb_viewed_slider">
+                        @php
+                        $fav_care_count=1;
+                        @endphp
 
                         @foreach($user->shop->merchandise as $merc)
                         @if($merc->highlight)
-                        <div class="owl-item">
+                        
+                        <div id="fav_caro_{{$fav_care_count}}" class="owl-item fav_caro">
                             <a class="" href="/shop/{{$user->api_token}}/{{$merc->id}}/product">
                             <div class="  bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="bbb_viewed_image"><img src="{{$merc->Product_Img}}" alt=""></div>
@@ -67,6 +79,10 @@ foreach($user->shop->merchandise as $mmmm){
                             </div>
                             </a>
                         </div>
+                        @php
+                        $fav_care_count++;
+                        @endphp
+
                         @endif
                         @endforeach
 
@@ -167,7 +183,7 @@ foreach($user->shop->merchandise as $mmmm){
                     <label class="font-weight-bold">商品</label>
                 </div>
                 <div class="form-group"><hr></div>
-                <div class="serv stage_bg">
+                <div id="my_serv" class="serv stage_bg">
                     <ul id="display_merchandise">
                         @if(count($user->shop->merchandise)==0)
                             <label class="container-fluid">商品尚未建立</label>
@@ -184,18 +200,36 @@ foreach($user->shop->merchandise as $mmmm){
 
 @section('js')
 <script>
+    var device=what_device();
     var cate_id={!! json_encode($cate_id) !!};
     var user={!! json_encode($user) !!};
     var category={!! json_encode($user->shop->category) !!};
     var merchandise={!! json_encode($user->shop->merchandise) !!};
     function show_my_merchandise(obj){
         obj.forEach(function(item,index){
-            var li = document.createElement('li');
+            var li = document.createElement('li');  
+                /*if(device=='mobile'){
+                    li.setAttribute("class","my-3 searchtable mx-auto");
+                }else{
+                    li.setAttribute("class","my-3 searchtable");
+                }*/
                 li.setAttribute("class","my-3 searchtable");
-                li.setAttribute("data-index",item.Product_Name);
+                li.setAttribute("data-index",item.Product_Name); 
+                var my_serv=document.getElementById("my_serv").clientWidth;
+                    console.log('my_serv',my_serv)
+                if(device=='mobile'){
+                    var my_serv=document.getElementById("my_serv").clientWidth;
+                    console.log('my_serv',my_serv)
+                    li.setAttribute('style'," width: "+my_serv/2+";");
+                }
+               
             var a= document.createElement('a');
                 a.setAttribute("href","/shop/"+user.api_token+"/"+item.id+"/"+"product");
-                a.setAttribute("class","shop_card card shadow mx-3 ");
+                if(device=='mobile'){
+                    a.setAttribute("class","shop_card card shadow ");
+                }else{
+                    a.setAttribute("class","shop_card card shadow mx-2");
+                }
             var button = document.createElement('button');
                 button.setAttribute("class","btn btn-link");
                 button.setAttribute("type","button");
@@ -210,6 +244,7 @@ foreach($user->shop->merchandise as $mmmm){
                     product_img.setAttribute('src',"");
                 }
                 product_img.setAttribute('style',"height: 8rem; width: 8rem;");
+                
             var product_price = document.createElement('div');
                 product_price.setAttribute('class',' mt-3');
                 if(item.Product_Price!=null){
@@ -285,6 +320,14 @@ foreach($user->shop->merchandise as $mmmm){
         })
     });
 
+    var fav_caro=document.querySelectorAll(".fav_caro")
+    fav_caro.forEach(function(item,index){
+        var fav_caro_item=document.getElementById(item.id);
+        if(device=='mobile'){
+            fav_caro_item.classList.add('container-fluid');
+        }
+    });
+
 
 
 
@@ -310,8 +353,7 @@ responsive:
 575:{items:2},
 768:{items:3},
 991:{items:4},
-1199:{items:6},
-1399:{items:7}
+1199:{items:6}
 }
 });
 

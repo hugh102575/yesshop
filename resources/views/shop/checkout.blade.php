@@ -366,6 +366,11 @@ label {
                     @endforeach
                 @endif
 
+                @if($user->shop->ship_tax!=null)
+                <div class="mx-auto mb-5">
+                  <span class="text-danger">運費</span> $ {{$user->shop->ship_tax}}
+                </div>
+                @endif
 
         </div>
         </div>
@@ -483,6 +488,10 @@ label {
 
 @section('js')
 <script>
+var user={!! json_encode($user) !!};
+var shop={!! json_encode($user->shop) !!};
+var ship_tax=shop.ship_tax;
+
 $(document).ready(function() {
 var fadeTime = 10;
 
@@ -497,12 +506,17 @@ function recalculateCart()
   $('.product').each(function () {
     subtotal += parseInt($(this).children('.product-line-price').text());
   });
+  var shipping=0;
+  if(ship_tax!=null){
+    shipping = ship_tax;
+  }
+  var total=subtotal+shipping;
 
   /* 顯示總價格 */
   $('.totals-value').fadeOut(fadeTime, function() {
-    $('#cart-subtotal').html(subtotal);
+    $('#cart-subtotal').html(total);
     $('.totals-value').fadeIn(fadeTime);
-    document.getElementById('order_price').value=subtotal;
+    document.getElementById('order_price').value=total;
   });
  }
 })

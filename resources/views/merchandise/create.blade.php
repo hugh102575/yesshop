@@ -28,7 +28,7 @@
     <div class="form-group row">
       <label for="Product_Name" class="col-sm-4 col-form-label">商品名稱<font color="#FF0000">*</font></label>
       <div class="col-sm-8">
-        <input class="form-control" type="text" name="Product_Name" placeholder="請輸入商品名稱" required="required" value="" maxlength="30">
+        <input class="form-control" type="text" name="Product_Name" placeholder="請輸入商品名稱" required="required" value="">
       </div>
     </div>
 
