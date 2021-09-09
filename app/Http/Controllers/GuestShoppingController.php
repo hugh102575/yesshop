@@ -289,6 +289,15 @@ class GuestShoppingController extends Controller
             return redirect()->route('shop.my_info', ['api_token'=>$token, 'cate_id'=> 'all'])->with('error_msg', '會員資料更新失敗！');
         }
     }
+    public function get_csrf(){
+        return csrf_token();
+    }
+    public function api_test(){
+        return json_encode('GET api test');
+    }
+    public function api_test_p(Request $request){
+        return 'POST api test: '.json_encode($request->all());
+    }
 
 
     /*public function example($token){

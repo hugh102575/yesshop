@@ -6,7 +6,7 @@
 @php
 $display_rows=$user->shop->display_rows;
 if($display_rows==null){
-    $display_rows=5;
+    $display_rows=6;
 }
 $display_percent=100/$display_rows;
 //$display_percent=50;
@@ -180,7 +180,7 @@ foreach($user->shop->merchandise as $mmmm){
 <div class="card shadow">
             <div class="card-body">
                 <div class="form-group ">
-                    <label class="font-weight-bold">商品</label>
+                    <label class="font-weight-bold">{{$user->shop->Shop_Name}}</label>
                 </div>
                 <div class="form-group"><hr></div>
                 <div id="my_serv" class="serv stage_bg">

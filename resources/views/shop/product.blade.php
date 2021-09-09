@@ -163,7 +163,7 @@ width: 150px;
 }
 
 
-@-webkit-keyframes opacity {
+/*@-webkit-keyframes opacity {
   0% {
     opacity: 0;
     -webkit-transform: scale(3);
@@ -182,6 +182,7 @@ width: 150px;
     opacity: 1;
     -webkit-transform: scale(1);
             transform: scale(1); } }
+*/
 
 /*# sourceMappingURL=style.css.map */
 

@@ -69,6 +69,8 @@ Route::get('shop/{api_token}/order', [GuestShoppingController::class, 'my_order'
 Route::post('shop/{api_token}/{id}/order_update', [GuestShoppingController::class, 'order_update'])->name('shop.order_update');
 Route::get('shop/{api_token}/my_info', [GuestShoppingController::class, 'my_info'])->name('shop.my_info');
 Route::post('shop/{api_token}/my_update', [GuestShoppingController::class, 'my_update'])->name('shop.my_update');
+Route::get('api_test', [GuestShoppingController::class, 'api_test']);
+Route::post('api_test', [GuestShoppingController::class, 'api_test_p']);
 
 //Route::get('shop/{api_token}/email/verify', [GuestShoppingController::class, 'verify'])->name('shop.verify');
 //Route::post('shop/{api_token}/email/resend', [GuestShoppingController::class, 'resend'])->name('shop.resend');

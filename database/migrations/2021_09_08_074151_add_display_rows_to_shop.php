@@ -14,7 +14,7 @@ class AddDisplayRowsToShop extends Migration
     public function up()
     {
         Schema::table('shop', function (Blueprint $table) {
-            $table->integer('display_rows')->after('ship_tax')->default('5')->nullable();
+            $table->integer('display_rows')->after('ship_tax')->default('6')->nullable();
         });
     }
 
