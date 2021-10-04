@@ -251,14 +251,13 @@ form {
 <style id="search_style"></style>
 <script type="text/javascript">
 var searchStyle = document.getElementById('search_style');
-document.getElementById('search')
-.addEventListener('input', function() {
+document.getElementById('search').addEventListener('input', function() {
   if (!this.value) {
     searchStyle.innerHTML = "";
     return;
   }
   // look ma, no indexOf!
-  searchStyle.innerHTML = ".searchtable:not([data-index*=\"" + this.value.toLowerCase() + "\"]) { display: none; }";
+  searchStyle.innerHTML = ".searchtable:not([data-index*=\"" + this.value + "\"]) { display: none; }";
   // beware of css injections!
 });
 

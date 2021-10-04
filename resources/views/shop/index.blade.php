@@ -26,6 +26,25 @@ $display_percent=100/$display_rows;
 .shop_card:hover{
     transform: scale(1.05);
 }
+.word_flow1 {
+  white-space:nowrap; 
+  width: 100px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
+}
+.word_flow {
+    height:50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical; 
+}
+img {
+  object-fit: cover;
+/*   object-fit: scale-down; */
+}
+
 </style>
 @endsection
 
@@ -69,7 +88,7 @@ foreach($user->shop->merchandise as $mmmm){
                             <div class="  bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                 <div class="bbb_viewed_image"><img src="{{$merc->Product_Img}}" alt=""></div>
                                 <div class="bbb_viewed_content text-center">
-                                    <div class="bbb_viewed_name">{{$merc->Product_Name}}</div>
+                                    <div class="bbb_viewed_name word_flow">{{$merc->Product_Name}}</div>
                                     <pre class="bbb_viewed_price">${{$merc->Product_Price}}</pre>
                                 </div>
                                 <ul class="item_marks">
@@ -214,7 +233,8 @@ foreach($user->shop->merchandise as $mmmm){
                     li.setAttribute("class","my-3 searchtable");
                 }*/
                 li.setAttribute("class","my-3 searchtable");
-                li.setAttribute("data-index",item.Product_Name); 
+                li.setAttribute("data-index",item.Product_Name);
+                console.log('名稱',item.Product_Name); 
                 var my_serv=document.getElementById("my_serv").clientWidth;
                     console.log('my_serv',my_serv)
                 if(device=='mobile'){
@@ -234,7 +254,7 @@ foreach($user->shop->merchandise as $mmmm){
                 button.setAttribute("class","btn btn-link");
                 button.setAttribute("type","button");
             var product_name = document.createElement('div');
-                product_name.setAttribute("class","mt-3 text-dark mb-1");
+                product_name.setAttribute("class","mt-3 text-dark mb-1 word_flow");
                 product_name.innerHTML=item.Product_Name;
             var product_img = document.createElement('img');
                 product_img.setAttribute("class","p-0");

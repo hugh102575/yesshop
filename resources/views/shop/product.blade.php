@@ -10,7 +10,11 @@ body {
   overflow-x: hidden; }
 
 img {
-  max-width: 100%; }
+  max-width: 100%;
+  object-fit: cover;
+/*   object-fit: scale-down; */
+
+}
 
 .preview {
   display: -webkit-box;
