@@ -26,14 +26,8 @@ $display_percent=100/$display_rows;
 .shop_card:hover{
     transform: scale(1.05);
 }
-.word_flow1 {
-  white-space:nowrap; 
-  width: 100px; 
-  overflow: hidden;
-  text-overflow: ellipsis; 
-}
 .word_flow {
-    height:50px;
+    height:45px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
